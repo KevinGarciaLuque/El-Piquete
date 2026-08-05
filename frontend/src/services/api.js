@@ -9,4 +9,14 @@ export async function obtenerProductos() {
   return data;
 }
 
+export async function obtenerZonasEntrega() {
+  const { data } = await api.get('/zonas-entrega');
+  return data;
+}
+
+export async function crearPedido(payload) {
+  const { data } = await api.post('/pedidos', payload);
+  return data;
+}
+
 export default api;

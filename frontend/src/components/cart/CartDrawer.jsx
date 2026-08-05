@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import Button from '../ui/Button';
 import { buildWhatsAppLink } from '../../lib/whatsapp';
@@ -25,6 +26,12 @@ function construirMensajePedido(items, subtotal) {
 
 export default function CartDrawer() {
   const { items, totalItems, subtotal, removeItem, setQty, clear, abierto, cerrarCarrito } = useCart();
+  const navigate = useNavigate();
+
+  function irAlCheckout() {
+    cerrarCarrito();
+    navigate('/checkout');
+  }
 
   return (
     <AnimatePresence>
@@ -130,23 +137,27 @@ export default function CartDrawer() {
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
+                    <Button variant="primary" onClick={irAlCheckout} className="justify-center">
+                      Continuar con el pedido
+                    </Button>
                     <Button
                       as="a"
-                      variant="primary"
+                      variant="outline"
                       target="_blank"
                       rel="noopener noreferrer"
                       href={buildWhatsAppLink(construirMensajePedido(items, subtotal))}
                       className="justify-center"
                     >
-                      Finalizar pedido por WhatsApp
+                      Pedir por WhatsApp
                     </Button>
-                    <Button variant="outline" onClick={cerrarCarrito} className="justify-center">
+                    <button
+                      type="button"
+                      onClick={cerrarCarrito}
+                      className="mx-auto text-xs font-medium text-ink/60 underline hover:text-ink/80"
+                    >
                       Seguir comprando
-                    </Button>
+                    </button>
                   </div>
-                  <p className="mt-3 text-center text-xs text-ink/50">
-                    El pago y la entrega se coordinan por WhatsApp mientras habilitamos el pago en línea.
-                  </p>
                 </div>
               </>
             )}
