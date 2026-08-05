@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import encurtido from '../../assets/encurtido.png';
 import logo from '../../assets/logo.jpeg';
 import Button from '../ui/Button';
 
@@ -65,15 +64,7 @@ export default function Hero() {
         >
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-olive/20 via-carrot/15 to-chili/15 blur-2xl" />
           <div ref={imagenRef} className="relative aspect-square w-4/5 overflow-hidden rounded-full border-8 border-white bg-white shadow-2xl shadow-olive-dark/20">
-            <img
-              src={encurtido}
-              alt="Frasco de encurtido artesanal El Piquete"
-              className="h-full w-full object-cover"
-              style={{ transform: 'scale(1.3)', transformOrigin: '70% 35%' }}
-            />
-            <div className="absolute right-6 top-1/2 h-28 w-28 -translate-y-1/2 overflow-hidden rounded-full border-4 border-white shadow-lg sm:h-32 sm:w-32">
-              <img src={logo} alt="Encurtidos El Piquete" className="h-full w-full object-cover" />
-            </div>
+            <img src={logo} alt="Encurtidos El Piquete" className="h-full w-full object-cover" />
           </div>
         </motion.div>
       </div>
