@@ -1,10 +1,9 @@
-const NUMERO = import.meta.env.VITE_WHATSAPP_NUMBER;
-const MENSAJE = encodeURIComponent('¡Hola! Quiero hacer un pedido de Encurtidos El Piquete.');
+import { buildWhatsAppLink } from '../../lib/whatsapp';
 
 export default function WhatsAppButton() {
   return (
     <a
-      href={`https://wa.me/${NUMERO}?text=${MENSAJE}`}
+      href={buildWhatsAppLink('¡Hola! Quiero hacer un pedido de Encurtidos El Piquete.')}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
