@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.jpeg';
 import Button from '../ui/Button';
+import { useCart } from '../../context/CartContext';
 
 const NAV_LINKS = [
   { href: '#inicio', label: 'Inicio' },
@@ -12,10 +13,11 @@ const NAV_LINKS = [
   { href: '#contacto', label: 'Contacto' },
 ];
 
-function CartIcon({ count = 0 }) {
+function CartIcon({ count, onClick }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       aria-label="Carrito de compras"
       className="relative flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-olive/10"
     >
@@ -25,9 +27,15 @@ function CartIcon({ count = 0 }) {
         <circle cx="16.5" cy="19.5" r="1.4" />
       </svg>
       {count > 0 && (
-        <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-chili text-xs font-semibold text-cream">
+        <motion.span
+          key={count}
+          initial={{ scale: 0.5 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 15 }}
+          className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-chili text-xs font-semibold text-cream"
+        >
           {count}
-        </span>
+        </motion.span>
       )}
     </button>
   );
@@ -35,6 +43,7 @@ function CartIcon({ count = 0 }) {
 
 export default function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const { totalItems, alternarCarrito } = useCart();
 
   return (
     <header className="sticky top-0 z-50 border-b border-olive/15 bg-cream/95 backdrop-blur">
@@ -61,7 +70,7 @@ export default function Header() {
               Comprar ahora
             </Button>
           </span>
-          <CartIcon count={0} />
+          <CartIcon count={totalItems} onClick={alternarCarrito} />
           <button
             type="button"
             aria-label="Abrir menú"
