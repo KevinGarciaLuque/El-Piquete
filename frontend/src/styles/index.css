@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-olive-dark: #3e4a28;
+  --color-olive: #7c9a3c;
+  --color-cream: #fbf3e7;
+  --color-carrot: #e4772e;
+  --color-chili: #c1272d;
+  --color-magenta: #e0207a;
+  --color-navy: #1b2a4a;
+  --color-ink: #2b2a28;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}

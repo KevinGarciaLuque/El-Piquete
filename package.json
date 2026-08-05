@@ -1,0 +1,14 @@
+{
+  "name": "el-piquete",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Encurtidos El Piquete - tienda en linea",
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

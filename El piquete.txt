@@ -1,0 +1,362 @@
+una tienda en línea con carrito, pero diseñada como una marca artesanal premium, no como un supermercado lleno de opciones. Para encurtidos, la compra debe sentirse sencilla, apetecible y rápida desde el celular.
+
+Concepto recomendado
+
+La página podría manejar una imagen de:
+
+“Encurtidos artesanales, frescos y con el picante perfecto.”
+
+La estética debería transmitir:
+
+Producto natural.
+Preparación artesanal.
+Limpieza e higiene.
+Sabor casero, pero con presentación profesional.
+Confianza para pagar y recibir a domicilio.
+Paleta de colores
+
+Evitaría usar demasiados colores brillantes. Te recomiendo:
+
+Verde oliva oscuro: naturaleza y jalapeño.
+Crema o beige claro: fondo elegante.
+Naranja zanahoria: acentos.
+Rojo chile: botones o nivel de picante.
+Negro suave: textos y presentación premium.
+
+Para los títulos puedes usar una tipografía elegante con personalidad, combinada con una tipografía moderna y fácil de leer para los precios y descripciones.
+
+Estructura de la página principal
+1. Encabezado
+
+En la parte superior:
+
+Logo | Inicio | Productos | Combos | Nosotros | Preguntas | Contacto | 🛒
+
+También colocaría un botón visible:
+
+Comprar ahora
+
+En celular utilizaría un menú compacto y el carrito siempre visible.
+
+2. Portada principal
+
+Una fotografía profesional de uno o varios frascos, acompañados de cebolla, zanahoria y jalapeños frescos.
+
+Texto de ejemplo:
+
+El sabor que transforma cada comida
+Encurtidos artesanales preparados con ingredientes seleccionados, frescos, crujientes y con el nivel de picante perfecto.
+
+Botones:
+
+Comprar encurtidos
+Conocer nuestros ingredientes
+
+La fotografía será una parte esencial. El producto debe verse iluminado, fresco y limpio, con el frasco abierto y los ingredientes visibles.
+
+3. Productos destacados
+
+Aquí mostrarías tarjetas elegantes para cada presentación.
+
+Encurtido tradicional
+
+Cebolla, zanahoria y jalapeño
+
+Presentación: 250 ml
+Nivel de picante: 🌶️🌶️
+Precio: L 100
+Disponibilidad: En existencia
+
+Botones:
+
+Añadir al carrito
+Comprar ahora
+
+El botón Comprar ahora llevaría directamente al proceso de pago con ese producto. El botón Añadir al carrito permitiría seguir comprando.
+
+¿Por qué sí necesitas carrito?
+
+Porque probablemente tendrás:
+
+Diferentes tamaños de frasco.
+Diferentes niveles de picante.
+Combos de 2, 3 o 6 unidades.
+Promociones.
+Compras para restaurantes.
+Productos adicionales en el futuro.
+
+Mi recomendación es utilizar un carrito lateral: cuando el cliente agrega un producto, se abre una pequeña ventana desde el lado derecho sin sacarlo de la página.
+
+4. Combos
+
+Los combos pueden aumentar bastante el valor de cada pedido.
+
+Ejemplos:
+
+Combo para probar
+1 encurtido tradicional.
+1 encurtido picante.
+1 encurtido suave.
+Combo familiar
+3 frascos grandes.
+Precio especial.
+Entrega reducida o gratuita según zona.
+Combo para negocio
+6 o 12 frascos.
+Precio mayorista.
+Solicitud de cotización.
+
+Podrías identificar uno como:
+
+Más vendido
+
+5. Sección de beneficios
+
+Mostraría cuatro beneficios con iconos simples:
+
+Ingredientes frescos
+Cebolla, zanahoria y jalapeños seleccionados.
+
+Preparación artesanal
+Elaborados por lotes para conservar su sabor y textura.
+
+Diferentes niveles de picante
+Suave, tradicional y extra picante.
+
+Entrega segura
+Empaque protegido y seguimiento de tu pedido.
+
+No publicaría frases como “100 % natural”, “sin conservantes” o una duración específica hasta tener la fórmula y vida útil validadas.
+
+6. Historia de la marca
+
+Esta sección crea conexión con el cliente:
+
+Nacimos con la idea de convertir una receta tradicional en un producto práctico, delicioso y cuidadosamente preparado. Cada frasco combina frescura, acidez y el toque justo de picante.
+
+Podrías incluir una fotografía del proceso, los ingredientes o una persona preparando los frascos con una imagen limpia y profesional.
+
+7. Formas de disfrutarlo
+
+Esto también ayuda a vender:
+
+Con carne asada.
+En hamburguesas.
+Con pollo.
+En tacos y baleadas.
+Con pupusas.
+Como acompañamiento de comidas.
+En tablas de bocadillos.
+
+Podrías mostrar fotografías de cada combinación y un botón de compra debajo.
+
+8. Opiniones
+
+Cuando tengas clientes, mostraría reseñas verificadas:
+
+“Tiene un picante equilibrado y las verduras permanecen crujientes.”
+
+También podrías permitir que el cliente suba una fotografía de cómo utilizó el producto.
+
+9. Preguntas frecuentes
+
+La página debe responder:
+
+¿Cuánto dura el encurtido?
+¿Debe mantenerse refrigerado?
+¿Qué nivel de picante tiene?
+¿Qué ingredientes contiene?
+¿Dónde realizan entregas?
+¿Cuánto cuesta el envío?
+¿Puedo comprar al por mayor?
+¿Qué métodos de pago aceptan?
+
+La información sobre conservación y duración debe corresponder a los resultados reales de tu formulación y estudio de vida útil.
+
+Proceso de compra recomendado
+
+El flujo ideal sería:
+
+1. Carrito
+
+El cliente revisa:
+
+Productos.
+Presentaciones.
+Cantidades.
+Subtotal.
+Descuentos.
+Costo de entrega.
+Total.
+2. Datos del cliente
+Nombre.
+Teléfono.
+Correo.
+Departamento.
+Ciudad o municipio.
+Dirección.
+Punto de referencia.
+Ubicación de Google Maps opcional.
+3. Método de entrega
+Entrega a domicilio.
+Recoger en punto de venta.
+Envío nacional, cuando lo implementes.
+
+El sistema debe calcular el envío por zona. Por ejemplo, Tegucigalpa podría dividirse en varias tarifas de entrega.
+
+4. Forma de pago
+Tarjeta de crédito o débito.
+Transferencia bancaria.
+PayPal.
+Pago contra entrega, solamente en zonas seleccionadas.
+5. Confirmación
+
+Al finalizar:
+
+¡Gracias por tu compra!
+Tu pedido #ENC-000125 ha sido recibido.
+
+Además:
+
+Correo de confirmación.
+Mensaje por WhatsApp.
+Resumen del pedido.
+Estado del pago.
+Fecha estimada de entrega.
+Pagos en línea en Honduras
+
+Para una página personalizada, analizaría principalmente estas opciones:
+
+BAC E-commerce
+
+Sería una de las opciones más adecuadas para integrar pagos con tarjetas directamente en la tienda. BAC Honduras ofrece E-commerce para procesar ventas desde una página web y Compra-Click para cobrar mediante enlaces compartidos por WhatsApp, redes sociales o correo.
+
+Para comenzar rápidamente podrías usar:
+
+Página con catálogo y carrito.
+El sistema genera el pedido.
+El cliente recibe un enlace de Compra-Click.
+Al pagar, confirmas el pedido.
+
+Para una experiencia más profesional, utilizarías la integración E-commerce dentro del proceso de compra. BAC publica costos de afiliación, procesamiento mensual y transacción para Honduras, pero conviene solicitar una cotización actualizada antes de desarrollar la integración.
+
+PayPal
+
+También puedes agregar PayPal como forma de pago alternativa. PayPal Honduras ofrece cuentas empresariales, pagos en sitios web y capacidad para enviar, recibir y retirar fondos, sujeto a las condiciones de la cuenta y del método de retiro disponible.
+
+Stripe
+
+No desarrollaría el proyecto dependiendo de Stripe, porque Honduras no figura actualmente entre los países admitidos para abrir una cuenta local de Stripe Payments.
+
+Mi combinación recomendada
+
+Para iniciar:
+
+BAC Compra-Click o transferencia bancaria.
+Pago contra entrega en zonas controladas.
+PayPal como alternativa.
+
+Cuando aumenten las ventas:
+
+BAC E-commerce integrado.
+Confirmación automática mediante notificaciones del proveedor.
+Control automático de pagos, pedidos e inventario.
+
+Nunca debes guardar números completos de tarjetas, códigos CVV ni datos sensibles en tu base de datos. El pago debe procesarlo la plataforma bancaria.
+
+Panel administrativo
+
+Tu página debería incluir un panel donde puedas:
+
+Crear productos.
+Configurar tamaños y precios.
+Subir fotografías.
+Controlar inventario.
+Crear combos.
+Configurar cupones.
+Ver pedidos.
+Confirmar transferencias.
+Cambiar estados.
+Configurar zonas de entrega.
+Consultar ventas.
+Ver productos más vendidos.
+Descargar reportes.
+
+Estados recomendados:
+
+Pendiente de pago → Pagado → En preparación → Listo → En camino → Entregado → Cancelado
+
+También agregaría control por lotes para relacionar los pedidos con la producción correspondiente.
+
+Tecnología recomendada
+
+Como eres programador, lo podrías construir con una estructura similar a tus otros sistemas:
+
+Frontend
+Next.js o React.
+Diseño responsive.
+PWA instalable.
+Carrito persistente.
+Optimización de imágenes.
+SEO para productos.
+Backend
+Node.js con Express o NestJS.
+API REST.
+Autenticación para administradores.
+Control de inventario y pedidos.
+Integración con pagos.
+Envío de correos y WhatsApp.
+Base de datos
+
+MySQL con tablas principales:
+
+productos
+variantes_producto
+inventario
+clientes
+direcciones
+pedidos
+detalle_pedido
+pagos
+zonas_entrega
+cupones
+lotes_produccion
+
+Para este negocio no necesitas microservicios inicialmente. Un backend modular bien organizado será suficiente y más fácil de mantener.
+
+Información obligatoria del producto
+
+En la ficha de cada encurtido mostraría:
+
+Nombre del producto.
+Ingredientes.
+Contenido neto.
+Peso escurrido, cuando corresponda.
+Nivel de picante.
+Instrucciones de conservación.
+Fecha de vencimiento o consumo preferente.
+Advertencias aplicables.
+Número de registro sanitario, cuando sea otorgado.
+Datos del fabricante.
+
+ARSA señala que las etiquetas y empaques deben incluir, entre otros datos, el nombre específico, ingredientes, lote, fecha de vencimiento, contenido neto, origen, fabricante e instrucciones de uso y conservación.
+
+La versión que yo haría
+
+Crearía una tienda boutique de una sola página, muy visual y rápida:
+
+Portada → Productos → Combos → Beneficios → Historia → Opiniones → Preguntas → Contacto
+
+Con:
+
+Carrito lateral.
+Compra rápida.
+Pagos en línea.
+Cálculo de envío.
+WhatsApp flotante.
+Panel administrativo.
+Diseño completamente orientado a celular.
+
+Evitaría comenzar con demasiadas páginas. Lo elegante para este producto será tener pocas secciones, fotografías excelentes, textos breves y un proceso de compra de no más de tres pasos.
+
+Pásame el nombre que tendrá la marca, las presentaciones y los sabores, y te preparo la estructura visual completa de la página, incluyendo textos, colores y distribución de cada sección.
