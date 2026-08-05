@@ -4,6 +4,20 @@ CREATE DATABASE IF NOT EXISTS el_piquete
 USE el_piquete;
 
 -- ---------------------------------------------------------------------------
+-- Administradores
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS administradores (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(120) NOT NULL,
+  correo VARCHAR(150) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  rol ENUM('admin') NOT NULL DEFAULT 'admin',
+  activo BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ---------------------------------------------------------------------------
 -- Catalogo
 -- ---------------------------------------------------------------------------
 

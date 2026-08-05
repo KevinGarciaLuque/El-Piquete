@@ -1,0 +1,25 @@
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.jpeg';
+
+export default function AdminLayout({ children }) {
+  const { admin, logout } = useAuth();
+
+  return (
+    <div className="min-h-screen bg-cream">
+      <header className="flex items-center justify-between border-b border-olive/15 bg-white/70 px-4 py-3 sm:px-6">
+        <Link to="/admin/pedidos" className="flex items-center gap-2">
+          <img src={logo} alt="Encurtidos El Piquete" className="h-9 w-9 rounded-full object-cover" />
+          <span className="font-display text-lg font-semibold text-navy">Panel admin</span>
+        </Link>
+        <div className="flex items-center gap-3 text-sm">
+          <span className="hidden text-ink/60 sm:inline">{admin?.correo}</span>
+          <button type="button" onClick={logout} className="font-medium text-chili hover:text-chili/80">
+            Cerrar sesión
+          </button>
+        </div>
+      </header>
+      <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6">{children}</main>
+    </div>
+  );
+}

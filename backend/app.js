@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const productosRoutes = require('./routes/productos.routes');
 const zonasRoutes = require('./routes/zonas.routes');
 const pedidosRoutes = require('./routes/pedidos.routes');
+const authRoutes = require('./routes/auth.routes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -20,6 +21,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/productos', productosRoutes);
 app.use('/api/zonas-entrega', zonasRoutes);
 app.use('/api/pedidos', pedidosRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ mensaje: 'Ruta no encontrada' });
