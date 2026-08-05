@@ -57,10 +57,12 @@ export default function ProductCard({ producto, index = 0, cotizacion = false, e
         <img
           src={producto.imagen_url || encurtido}
           alt={producto.nombre}
-          className="h-full w-full object-cover"
-          style={{ transform: 'scale(1.3)', transformOrigin: '72% 42%' }}
+          className="h-full w-full object-contain p-2"
         />
-        <div className="absolute bottom-2 left-2 h-12 w-12 -rotate-6 overflow-hidden rounded-full border-2 border-white shadow-md">
+        <div
+          className="absolute h-14 w-14 -translate-x-1/2 -translate-y-1/2 -rotate-6 overflow-hidden rounded-full border-2 border-white shadow-md"
+          style={{ left: '41%', top: '58%' }}
+        >
           <img src={logo} alt="" className="h-full w-full object-cover" />
         </div>
       </div>
