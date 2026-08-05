@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS variantes_producto (
 
 CREATE TABLE IF NOT EXISTS inventario (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  variante_id INT NOT NULL,
+  variante_id INT NOT NULL UNIQUE,
   cantidad_disponible INT NOT NULL DEFAULT 0,
   lote_produccion_id INT NULL,
   actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
