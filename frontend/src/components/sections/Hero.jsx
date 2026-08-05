@@ -71,8 +71,8 @@ export default function Hero() {
               className="h-full w-full object-cover"
               style={{ transform: 'scale(1.3)', transformOrigin: '70% 35%' }}
             />
-            <div className="absolute bottom-4 left-4 h-16 w-16 -rotate-6 overflow-hidden rounded-full border-4 border-white shadow-lg">
-              <img src={logo} alt="" className="h-full w-full object-cover" />
+            <div className="absolute right-6 top-1/2 h-28 w-28 -translate-y-1/2 overflow-hidden rounded-full border-4 border-white shadow-lg sm:h-32 sm:w-32">
+              <img src={logo} alt="Encurtidos El Piquete" className="h-full w-full object-cover" />
             </div>
           </div>
         </motion.div>
