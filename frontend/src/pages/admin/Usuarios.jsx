@@ -9,6 +9,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { inputClass } from '../../components/checkout/Field';
 import Button from '../../components/ui/Button';
+import PasswordInput from '../../components/ui/PasswordInput';
 
 const VACIO = { nombre: '', correo: '', password: '' };
 const formatoFecha = new Intl.DateTimeFormat('es-HN', { dateStyle: 'medium' });
@@ -48,10 +49,9 @@ function FilaContrasena({ usuario, onGuardado }) {
 
   return (
     <div className="flex items-center gap-2">
-      <input
-        type="password"
+      <PasswordInput
         placeholder="Nueva contraseña"
-        className={`${inputClass} w-40`}
+        className="w-40"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -131,7 +131,7 @@ export default function Usuarios() {
       <div className="grid gap-3 rounded-xl border border-olive/15 bg-white/60 p-4 sm:grid-cols-4">
         <input className={inputClass} placeholder="Nombre" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} />
         <input type="email" className={inputClass} placeholder="Correo" value={form.correo} onChange={(e) => setForm({ ...form, correo: e.target.value })} />
-        <input type="password" className={inputClass} placeholder="Contraseña" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+        <PasswordInput placeholder="Contraseña" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
         <Button variant="primary" onClick={handleCrear} disabled={creando}>
           {creando ? 'Creando…' : '+ Crear usuario'}
         </Button>

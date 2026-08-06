@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { inputClass } from '../../components/checkout/Field';
 import Button from '../../components/ui/Button';
+import PasswordInput from '../../components/ui/PasswordInput';
 import logo from '../../assets/logo.webp';
 
 export default function Login() {
@@ -41,7 +42,7 @@ export default function Login() {
         </label>
         <label className="flex flex-col gap-1 text-sm">
           <span className="font-medium text-navy">Contraseña</span>
-          <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} />
+          <PasswordInput required value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
 
         {error && <p className="text-sm text-chili">{error}</p>}
