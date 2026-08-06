@@ -143,5 +143,31 @@ export async function descargarPedidosCsv() {
   return data;
 }
 
+// Usuarios administradores
+export async function obtenerUsuariosAdmin() {
+  const { data } = await adminApi.get('/admin/usuarios');
+  return data;
+}
+
+export async function crearUsuarioAdmin(payload) {
+  const { data } = await adminApi.post('/admin/usuarios', payload);
+  return data;
+}
+
+export async function actualizarUsuarioAdmin(id, payload) {
+  const { data } = await adminApi.put(`/admin/usuarios/${id}`, payload);
+  return data;
+}
+
+export async function cambiarPasswordUsuarioAdmin(id, password) {
+  const { data } = await adminApi.patch(`/admin/usuarios/${id}/password`, { password });
+  return data;
+}
+
+export async function eliminarUsuarioAdmin(id) {
+  const { data } = await adminApi.delete(`/admin/usuarios/${id}`);
+  return data;
+}
+
 export { TOKEN_KEY };
 export default adminApi;

@@ -8,6 +8,7 @@ const TABS = [
   { to: '/admin/cupones', label: 'Cupones' },
   { to: '/admin/zonas', label: 'Zonas de entrega' },
   { to: '/admin/reportes', label: 'Reportes' },
+  { to: '/admin/usuarios', label: 'Usuarios' },
 ];
 
 export default function AdminLayout({ children }) {

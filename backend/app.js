@@ -11,6 +11,7 @@ const adminProductosRoutes = require('./routes/admin.productos.routes');
 const adminCuponesRoutes = require('./routes/admin.cupones.routes');
 const adminZonasRoutes = require('./routes/admin.zonas.routes');
 const adminReportesRoutes = require('./routes/admin.reportes.routes');
+const adminUsuariosRoutes = require('./routes/admin.usuarios.routes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/api/admin/productos', adminProductosRoutes);
 app.use('/api/admin/cupones', adminCuponesRoutes);
 app.use('/api/admin/zonas', adminZonasRoutes);
 app.use('/api/admin/reportes', adminReportesRoutes);
+app.use('/api/admin/usuarios', adminUsuariosRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ mensaje: 'Ruta no encontrada' });

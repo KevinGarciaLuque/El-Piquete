@@ -13,6 +13,7 @@ const AdminProductoForm = lazy(() => import('./pages/admin/ProductoForm'));
 const AdminCupones = lazy(() => import('./pages/admin/Cupones'));
 const AdminZonas = lazy(() => import('./pages/admin/Zonas'));
 const AdminReportes = lazy(() => import('./pages/admin/Reportes'));
+const AdminUsuarios = lazy(() => import('./pages/admin/Usuarios'));
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
 
 function Cargando() {
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
   { path: '/admin/cupones', element: adminRoute(<AdminCupones />) },
   { path: '/admin/zonas', element: adminRoute(<AdminZonas />) },
   { path: '/admin/reportes', element: adminRoute(<AdminReportes />) },
+  { path: '/admin/usuarios', element: adminRoute(<AdminUsuarios />) },
 ]);
 
 export default router;
