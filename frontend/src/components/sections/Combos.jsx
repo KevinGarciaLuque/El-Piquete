@@ -1,9 +1,13 @@
 import ProductCard from '../ui/ProductCard';
+import VeggieAccent from '../ui/VeggieAccent';
+import zanahoria from '../../assets/zanahoria.webp';
 
 export default function Combos({ combos, estado }) {
   return (
-    <section id="combos" className="bg-olive/8 py-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section id="combos" className="relative overflow-hidden bg-olive/8 py-16">
+      <VeggieAccent src={zanahoria} side="right" className="top-16 w-48 translate-x-1/4 opacity-80 xl:w-64" />
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 max-w-xl">
           <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Combos</h2>
           <p className="mt-3 text-ink/70">
