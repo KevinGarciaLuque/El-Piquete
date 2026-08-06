@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 export default function VeggieAccent({ src, side = 'left', className = '' }) {
-  const offset = side === 'left' ? -60 : 60;
+  const offset = side === 'left' ? -100 : 100;
 
   return (
     <motion.img

@@ -5,7 +5,7 @@ import zanahoria from '../../assets/zanahoria.webp';
 export default function Combos({ combos, estado }) {
   return (
     <section id="combos" className="relative overflow-hidden bg-olive/8 py-16">
-      <VeggieAccent src={zanahoria} side="right" className="top-16 w-48 translate-x-1/4 opacity-80 xl:w-64" />
+      <VeggieAccent src={zanahoria} side="right" className="top-4 w-64 translate-x-1/4 opacity-90 sm:w-72 xl:w-80" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 max-w-xl">
