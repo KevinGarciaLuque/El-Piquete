@@ -7,6 +7,7 @@ const formatoLempiras = new Intl.NumberFormat('es-HN', {
 });
 
 const ETIQUETAS_PAGO = {
+  tarjeta: 'Tarjeta (BAC Compra-Click)',
   transferencia: 'Transferencia bancaria',
   contra_entrega: 'Pago contra entrega',
 };

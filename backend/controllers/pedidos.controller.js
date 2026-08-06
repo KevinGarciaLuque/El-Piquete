@@ -1,7 +1,9 @@
 const pool = require('../config/db');
+const { enviarCorreo } = require('../config/mailer');
+const { construirCorreoPedido } = require('../emails/pedidoConfirmacion');
 
 const METODOS_ENTREGA = ['domicilio', 'recoger'];
-const METODOS_PAGO = ['transferencia', 'contra_entrega'];
+const METODOS_PAGO = ['transferencia', 'contra_entrega', 'tarjeta'];
 const ESTADOS_PEDIDO = [
   'pendiente_pago',
   'pagado',
@@ -44,8 +46,9 @@ async function crearPedido(req, res, next) {
 
     const varianteIds = items.map((item) => item.varianteId);
     const [variantes] = await conn.query(
-      `SELECT v.id, v.precio, v.sku, i.cantidad_disponible
+      `SELECT v.id, v.precio, v.sku, v.presentacion, pr.nombre AS producto_nombre, i.cantidad_disponible
        FROM variantes_producto v
+       JOIN productos pr ON pr.id = v.producto_id
        JOIN inventario i ON i.variante_id = v.id
        WHERE v.id IN (?)
        FOR UPDATE`,
@@ -139,6 +142,31 @@ async function crearPedido(req, res, next) {
       metodoEntrega,
       tiempoEstimado,
     });
+
+    if (cliente.correo) {
+      const { subject, html } = construirCorreoPedido({
+        codigo,
+        clienteNombre: cliente.nombre,
+        items: items.map((item) => {
+          const variante = variantesPorId.get(item.varianteId);
+          return {
+            nombre: variante.producto_nombre,
+            presentacion: variante.presentacion,
+            cantidad: item.cantidad,
+            precioUnitario: Number(variante.precio),
+          };
+        }),
+        subtotal,
+        costoEnvio,
+        total,
+        metodoPago,
+        tiempoEstimado,
+      });
+
+      enviarCorreo({ to: cliente.correo, subject, html }).catch((error) =>
+        console.error('[mailer] Error enviando confirmacion de pedido:', error.message),
+      );
+    }
   } catch (error) {
     await conn.rollback();
     next(error);

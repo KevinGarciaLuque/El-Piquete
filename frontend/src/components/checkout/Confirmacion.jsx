@@ -8,11 +8,17 @@ const formatoLempiras = new Intl.NumberFormat('es-HN', {
   minimumFractionDigits: 0,
 });
 
+const ETIQUETAS_PAGO = {
+  tarjeta: 'Tarjeta (BAC Compra-Click)',
+  transferencia: 'Transferencia bancaria',
+  contra_entrega: 'Pago contra entrega',
+};
+
 export default function Confirmacion({ pedido }) {
   const mensaje = [
     `¡Hola! Quiero confirmar mi pedido ${pedido.codigo} de Encurtidos El Piquete.`,
     `Total: ${formatoLempiras.format(pedido.total)}`,
-    `Método de pago: ${pedido.metodoPago === 'transferencia' ? 'Transferencia bancaria' : 'Pago contra entrega'}`,
+    `Método de pago: ${ETIQUETAS_PAGO[pedido.metodoPago] || pedido.metodoPago}`,
   ].join('\n');
 
   return (

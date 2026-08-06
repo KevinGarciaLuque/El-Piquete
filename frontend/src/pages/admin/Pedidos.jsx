@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { obtenerPedidosAdmin, actualizarEstadoPedidoAdmin } from '../../services/adminApi';
 
 const ESTADOS = [
@@ -86,7 +87,9 @@ export default function Pedidos() {
             <tbody>
               {pedidos.map((pedido) => (
                 <tr key={pedido.id} className="border-b border-olive/10 last:border-0">
-                  <td className="px-4 py-3 font-medium text-navy">{pedido.codigo}</td>
+                  <td className="px-4 py-3 font-medium text-navy">
+                    <Link to={`/admin/pedidos/${pedido.codigo}`} className="hover:underline">{pedido.codigo}</Link>
+                  </td>
                   <td className="px-4 py-3">
                     <div>{pedido.cliente_nombre}</div>
                     <div className="text-xs text-ink/50">{pedido.cliente_telefono}</div>

@@ -21,6 +21,13 @@ export default function StepPago({ datos, actualizar }) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         <OpcionPago
+          valor="tarjeta"
+          actual={datos.metodoPago}
+          onSelect={(valor) => actualizar({ metodoPago: valor })}
+          titulo="Tarjeta (BAC Compra-Click)"
+          descripcion="Te enviamos un enlace de pago seguro"
+        />
+        <OpcionPago
           valor="transferencia"
           actual={datos.metodoPago}
           onSelect={(valor) => actualizar({ metodoPago: valor })}
@@ -34,10 +41,15 @@ export default function StepPago({ datos, actualizar }) {
           titulo="Pago contra entrega"
           descripcion="Pagas al recibir o recoger tu pedido"
         />
-        <OpcionPago valor="tarjeta" actual={datos.metodoPago} disabled titulo="Tarjeta de crédito/débito" descripcion="Próximamente" onSelect={() => {}} />
         <OpcionPago valor="paypal" actual={datos.metodoPago} disabled titulo="PayPal" descripcion="Próximamente" onSelect={() => {}} />
       </div>
 
+      {datos.metodoPago === 'tarjeta' && (
+        <p className="rounded-xl border border-olive/15 bg-white/60 p-4 text-sm text-ink/70">
+          Al confirmar tu pedido te enviaremos por WhatsApp un enlace de pago seguro (BAC Compra-Click) para pagar con
+          tarjeta de crédito o débito.
+        </p>
+      )}
       {datos.metodoPago === 'transferencia' && (
         <p className="rounded-xl border border-olive/15 bg-white/60 p-4 text-sm text-ink/70">
           Al confirmar tu pedido te compartiremos los datos de la cuenta bancaria por WhatsApp para completar la
