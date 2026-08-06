@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { inputClass } from '../../components/checkout/Field';
 import Button from '../../components/ui/Button';
-import logo from '../../assets/logo.jpeg';
+import logo from '../../assets/logo.webp';
 
 export default function Login() {
   const { login } = useAuth();

@@ -1,23 +1,31 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Checkout from './pages/Checkout';
-import AdminLogin from './pages/admin/Login';
-import AdminPedidos from './pages/admin/Pedidos';
-import AdminPedidoDetalle from './pages/admin/PedidoDetalle';
-import AdminProductos from './pages/admin/Productos';
-import AdminProductoForm from './pages/admin/ProductoForm';
-import AdminCupones from './pages/admin/Cupones';
-import AdminZonas from './pages/admin/Zonas';
-import AdminReportes from './pages/admin/Reportes';
-import AdminLayout from './components/admin/AdminLayout';
 import ProtectedRoute from './components/admin/ProtectedRoute';
+
+const AdminLogin = lazy(() => import('./pages/admin/Login'));
+const AdminPedidos = lazy(() => import('./pages/admin/Pedidos'));
+const AdminPedidoDetalle = lazy(() => import('./pages/admin/PedidoDetalle'));
+const AdminProductos = lazy(() => import('./pages/admin/Productos'));
+const AdminProductoForm = lazy(() => import('./pages/admin/ProductoForm'));
+const AdminCupones = lazy(() => import('./pages/admin/Cupones'));
+const AdminZonas = lazy(() => import('./pages/admin/Zonas'));
+const AdminReportes = lazy(() => import('./pages/admin/Reportes'));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
+
+function Cargando() {
+  return <p className="p-8 text-sm text-ink/60">Cargando…</p>;
+}
 
 function adminRoute(element) {
   return (
-    <ProtectedRoute>
-      <AdminLayout>{element}</AdminLayout>
-    </ProtectedRoute>
+    <Suspense fallback={<Cargando />}>
+      <ProtectedRoute>
+        <AdminLayout>{element}</AdminLayout>
+      </ProtectedRoute>
+    </Suspense>
   );
 }
 
@@ -39,7 +47,14 @@ const router = createBrowserRouter([
     ),
   },
   { path: '/admin', element: <Navigate to="/admin/pedidos" replace /> },
-  { path: '/admin/login', element: <AdminLogin /> },
+  {
+    path: '/admin/login',
+    element: (
+      <Suspense fallback={<Cargando />}>
+        <AdminLogin />
+      </Suspense>
+    ),
+  },
   { path: '/admin/pedidos', element: adminRoute(<AdminPedidos />) },
   { path: '/admin/pedidos/:codigo', element: adminRoute(<AdminPedidoDetalle />) },
   { path: '/admin/productos', element: adminRoute(<AdminProductos />) },

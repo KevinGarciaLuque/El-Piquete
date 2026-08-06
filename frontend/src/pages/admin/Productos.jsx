@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { obtenerProductosAdmin } from '../../services/adminApi';
 import { urlImagen } from '../../lib/media';
-import encurtido from '../../assets/encurtido.png';
+import encurtido from '../../assets/encurtido.webp';
 
 const formatoLempiras = new Intl.NumberFormat('es-HN', {
   style: 'currency',
@@ -45,6 +45,8 @@ export default function Productos() {
                 <img
                   src={urlImagen(producto.imagen_url) || encurtido}
                   alt={producto.nombre}
+                  loading="lazy"
+                  decoding="async"
                   className="h-14 w-14 rounded-lg object-cover"
                 />
                 <div>

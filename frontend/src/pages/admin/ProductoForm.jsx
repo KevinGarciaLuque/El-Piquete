@@ -14,7 +14,7 @@ import {
 import { inputClass } from '../../components/checkout/Field';
 import { urlImagen } from '../../lib/media';
 import Button from '../../components/ui/Button';
-import encurtido from '../../assets/encurtido.png';
+import encurtido from '../../assets/encurtido.webp';
 
 const VACIO = {
   nombre: '',

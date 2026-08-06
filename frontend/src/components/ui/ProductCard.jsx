@@ -4,8 +4,8 @@ import SpiceLevel from './SpiceLevel';
 import Button from './Button';
 import { buildWhatsAppLink } from '../../lib/whatsapp';
 import { useCart } from '../../context/CartContext';
-import encurtido from '../../assets/encurtido.png';
-import logo from '../../assets/logo.jpeg';
+import encurtido from '../../assets/encurtido.webp';
+import logo from '../../assets/logo.webp';
 
 const formatoLempiras = new Intl.NumberFormat('es-HN', {
   style: 'currency',
@@ -57,13 +57,15 @@ export default function ProductCard({ producto, index = 0, cotizacion = false, e
         <img
           src={producto.imagen_url || encurtido}
           alt={producto.nombre}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-contain p-2"
         />
         <div
           className="absolute h-14 w-14 -translate-x-1/2 -translate-y-1/2 -rotate-6 overflow-hidden rounded-full border-2 border-white shadow-md"
           style={{ left: '41%', top: '58%' }}
         >
-          <img src={logo} alt="" className="h-full w-full object-cover" />
+          <img src={logo} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
         </div>
       </div>
 

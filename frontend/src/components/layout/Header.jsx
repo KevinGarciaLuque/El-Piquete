@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../../assets/logo.jpeg';
+import logo from '../../assets/logo.webp';
 import Button from '../ui/Button';
 import { useCart } from '../../context/CartContext';
 
@@ -49,7 +49,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-olive/15 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <a href="#inicio" className="flex items-center gap-2">
-          <img src={logo} alt="Encurtidos El Piquete" className="h-12 w-12 rounded-full object-cover sm:h-14 sm:w-14" />
+          <img src={logo} alt="Encurtidos El Piquete" width="56" height="56" fetchPriority="high" className="h-12 w-12 rounded-full object-cover sm:h-14 sm:w-14" />
         </a>
 
         <nav className="hidden items-center gap-6 lg:flex">

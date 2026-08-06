@@ -1,4 +1,4 @@
-import logo from '../../assets/logo.jpeg';
+import logo from '../../assets/logo.webp';
 
 export default function Historia() {
   return (
@@ -13,7 +13,7 @@ export default function Historia() {
           </p>
         </div>
         <div className="mx-auto flex aspect-square w-full max-w-xs items-center justify-center overflow-hidden rounded-3xl border border-cream/20 bg-cream/5">
-          <img src={logo} alt="El Piquete" className="h-3/4 w-3/4 object-contain" />
+          <img src={logo} alt="El Piquete" width="300" height="300" loading="lazy" decoding="async" className="h-3/4 w-3/4 object-contain" />
         </div>
       </div>
     </section>

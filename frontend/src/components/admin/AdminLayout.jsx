@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import logo from '../../assets/logo.jpeg';
+import logo from '../../assets/logo.webp';
 
 const TABS = [
   { to: '/admin/pedidos', label: 'Pedidos' },

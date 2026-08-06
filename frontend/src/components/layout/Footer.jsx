@@ -1,4 +1,4 @@
-import logo from '../../assets/logo.jpeg';
+import logo from '../../assets/logo.webp';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -7,7 +7,7 @@ export default function Footer() {
     <footer id="contacto" className="bg-olive-dark text-cream">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div className="flex flex-col gap-3">
-          <img src={logo} alt="Encurtidos El Piquete" className="h-16 w-16 rounded-full object-cover" />
+          <img src={logo} alt="Encurtidos El Piquete" width="64" height="64" loading="lazy" decoding="async" className="h-16 w-16 rounded-full object-cover" />
           <p className="text-sm text-cream/80">
             El sabor que transforma cada comida. Encurtidos artesanales preparados con ingredientes seleccionados.
           </p>

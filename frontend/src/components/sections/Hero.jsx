@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import logo from '../../assets/logo.jpeg';
+import logo from '../../assets/logo.webp';
 import Button from '../ui/Button';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -64,7 +64,7 @@ export default function Hero() {
         >
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-olive/20 via-carrot/15 to-chili/15 blur-2xl" />
           <div ref={imagenRef} className="relative aspect-square w-4/5 overflow-hidden rounded-full border-8 border-white bg-white shadow-2xl shadow-olive-dark/20">
-            <img src={logo} alt="Encurtidos El Piquete" className="h-full w-full object-cover" />
+            <img src={logo} alt="Encurtidos El Piquete" width="400" height="400" fetchPriority="high" className="h-full w-full object-cover" />
           </div>
         </motion.div>
       </div>

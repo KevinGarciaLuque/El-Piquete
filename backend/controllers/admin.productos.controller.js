@@ -1,5 +1,10 @@
+const fs = require('fs/promises');
+const path = require('path');
+const sharp = require('sharp');
 const pool = require('../config/db');
 const slugify = require('../utils/slugify');
+
+const CARPETA_UPLOADS = path.join(__dirname, '..', 'uploads', 'productos');
 
 function errorHttp(status, mensaje) {
   const error = new Error(mensaje);
@@ -132,7 +137,14 @@ async function subirImagenProducto(req, res, next) {
   try {
     if (!req.file) return next(errorHttp(400, 'No se recibió ninguna imagen'));
 
-    const imagenUrl = `/uploads/productos/${req.file.filename}`;
+    const nombreArchivo = `producto-${req.params.id}-${Date.now()}.webp`;
+    await fs.mkdir(CARPETA_UPLOADS, { recursive: true });
+    await sharp(req.file.buffer)
+      .resize(1000, 1000, { fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toFile(path.join(CARPETA_UPLOADS, nombreArchivo));
+
+    const imagenUrl = `/uploads/productos/${nombreArchivo}`;
     await pool.query('UPDATE productos SET imagen_url = ? WHERE id = ?', [imagenUrl, req.params.id]);
     res.json({ imagen_url: imagenUrl });
   } catch (error) {
