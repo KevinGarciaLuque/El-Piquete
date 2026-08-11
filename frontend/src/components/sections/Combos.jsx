@@ -1,5 +1,6 @@
 import ProductCard from '../ui/ProductCard';
 import VeggieAccent from '../ui/VeggieAccent';
+import Reveal from '../ui/Reveal';
 import zanahoria from '../../assets/zanahoria.webp';
 
 export default function Combos({ combos, estado }) {
@@ -13,12 +14,12 @@ export default function Combos({ combos, estado }) {
       />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-10 max-w-xl">
+        <Reveal className="mb-10 max-w-xl">
           <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Combos</h2>
           <p className="mt-3 text-ink/70">
             Combos pensados para probar, compartir en familia y abastecer tu negocio.
           </p>
-        </div>
+        </Reveal>
 
         {estado === 'cargando' && <p className="text-sm text-ink/60">Cargando combos…</p>}
         {estado === 'error' && (

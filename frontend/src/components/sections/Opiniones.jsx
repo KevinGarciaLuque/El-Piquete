@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import useOpiniones from '../../hooks/useOpiniones';
 import { urlImagen } from '../../lib/media';
+import Reveal from '../ui/Reveal';
 
 function Estrellas({ calificacion }) {
   return (
@@ -32,16 +33,20 @@ function Avatar({ nombre, foto }) {
   );
 }
 
-function OpinionCard({ opinion }) {
+function OpinionCard({ opinion, index = 0 }) {
   return (
-    <figure className="flex h-full gap-5 rounded-2xl border border-olive/15 bg-white/60 p-6 shadow-sm transition-shadow hover:shadow-md">
+    <Reveal
+      as="figure"
+      delay={index * 0.08}
+      className="flex h-full gap-5 rounded-2xl border border-olive/15 bg-white/60 p-6 shadow-sm transition-shadow hover:shadow-md"
+    >
       <Avatar nombre={opinion.nombre} foto={opinion.foto_url && urlImagen(opinion.foto_url)} />
       <div className="flex flex-1 flex-col gap-2">
         <Estrellas calificacion={opinion.calificacion} />
         <blockquote className="flex-1 text-sm leading-relaxed text-ink/80">&ldquo;{opinion.comentario}&rdquo;</blockquote>
         <figcaption className="text-sm font-semibold text-navy">{opinion.nombre}</figcaption>
       </div>
-    </figure>
+    </Reveal>
   );
 }
 
@@ -50,10 +55,10 @@ export default function Opiniones() {
 
   return (
     <section id="opiniones" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6">
-      <div className="mb-10 max-w-xl">
+      <Reveal className="mb-10 max-w-xl">
         <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Opiniones</h2>
         <p className="mt-3 text-ink/70">Lo que dicen quienes ya probaron Encurtidos El Piquete.</p>
-      </div>
+      </Reveal>
 
       {estado === 'cargando' && <p className="text-sm text-ink/60">Cargando opiniones…</p>}
       {estado === 'error' && (
@@ -71,8 +76,8 @@ export default function Opiniones() {
 
       {estado === 'listo' && opiniones.length > 0 && (
         <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {opiniones.map((opinion) => (
-            <OpinionCard key={opinion.id} opinion={opinion} />
+          {opiniones.map((opinion, index) => (
+            <OpinionCard key={opinion.id} opinion={opinion} index={index} />
           ))}
         </div>
       )}

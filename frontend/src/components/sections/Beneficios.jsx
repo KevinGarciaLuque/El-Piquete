@@ -1,4 +1,5 @@
 import VeggieAccent from '../ui/VeggieAccent';
+import Reveal from '../ui/Reveal';
 import jalapeno from '../../assets/jalapeno.webp';
 import cebolla from '../../assets/cebolla.webp';
 
@@ -51,8 +52,8 @@ export default function Beneficios() {
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {BENEFICIOS.map((beneficio) => (
-            <div key={beneficio.titulo} className="flex flex-col items-start gap-3">
+          {BENEFICIOS.map((beneficio, index) => (
+            <Reveal key={beneficio.titulo} delay={index * 0.08} className="flex flex-col items-start gap-3">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-olive/15 text-olive-dark">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6">
                   {beneficio.icono}
@@ -60,7 +61,7 @@ export default function Beneficios() {
               </span>
               <h3 className="font-display text-lg font-semibold text-navy">{beneficio.titulo}</h3>
               <p className="text-sm text-ink/70">{beneficio.descripcion}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
