@@ -7,3 +7,5 @@ build/
 .DS_Store
 backend/uploads/productos/*
 !backend/uploads/productos/.gitkeep
+backend/uploads/opiniones/*
+!backend/uploads/opiniones/.gitkeep
