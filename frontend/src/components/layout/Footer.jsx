@@ -4,7 +4,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contacto" className="bg-olive-dark text-cream">
+    <footer id="contacto" className="scroll-mt-24 bg-olive-dark text-cream">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div className="flex flex-col gap-3">
           <img src={logo} alt="Encurtidos El Piquete" width="64" height="64" loading="lazy" decoding="async" className="h-16 w-16 rounded-full object-cover" />
@@ -28,7 +28,9 @@ export default function Footer() {
           <h3 className="mb-1 font-display text-base font-semibold">Enlaces</h3>
           <a href="#productos" className="text-cream/80 hover:text-cream">Productos</a>
           <a href="#combos" className="text-cream/80 hover:text-cream">Combos</a>
+          <a href="#opiniones" className="text-cream/80 hover:text-cream">Opiniones</a>
           <a href="#preguntas" className="text-cream/80 hover:text-cream">Preguntas frecuentes</a>
+          <a href="/opinion" className="text-cream/80 hover:text-cream">Déjanos tu opinión</a>
         </div>
       </div>
 

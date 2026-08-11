@@ -3,7 +3,7 @@ import { obtenerZonasAdmin, crearZonaAdmin, actualizarZonaAdmin } from '../../se
 import { inputClass } from '../../components/checkout/Field';
 import Button from '../../components/ui/Button';
 
-const VACIO = { nombre: '', costo_envio: '', tiempo_estimado: '' };
+const VACIO = { nombre: '', costo_envio: '', tiempo_estimado: '', acepta_contra_entrega: true };
 const formatoLempiras = new Intl.NumberFormat('es-HN', { style: 'currency', currency: 'HNL', minimumFractionDigits: 0 });
 
 export default function Zonas() {
@@ -24,7 +24,12 @@ export default function Zonas() {
 
   function editar(zona) {
     setEditandoId(zona.id);
-    setForm({ nombre: zona.nombre, costo_envio: zona.costo_envio, tiempo_estimado: zona.tiempo_estimado || '' });
+    setForm({
+      nombre: zona.nombre,
+      costo_envio: zona.costo_envio,
+      tiempo_estimado: zona.tiempo_estimado || '',
+      acepta_contra_entrega: Boolean(zona.acepta_contra_entrega),
+    });
   }
 
   function cancelarEdicion() {
@@ -68,6 +73,14 @@ export default function Zonas() {
           <Button variant="primary" onClick={guardar}>{editandoId ? 'Guardar' : '+ Crear zona'}</Button>
           {editandoId && <Button variant="outline" onClick={cancelarEdicion}>Cancelar</Button>}
         </div>
+        <label className="flex items-center gap-2 text-sm text-ink/70 sm:col-span-4">
+          <input
+            type="checkbox"
+            checked={form.acepta_contra_entrega}
+            onChange={(e) => setForm({ ...form, acepta_contra_entrega: e.target.checked })}
+          />
+          Acepta pago contra entrega
+        </label>
         {error && <p className="text-sm text-chili sm:col-span-4">{error}</p>}
       </div>
 
@@ -81,6 +94,7 @@ export default function Zonas() {
                 <th className="px-4 py-3">Nombre</th>
                 <th className="px-4 py-3">Costo de envío</th>
                 <th className="px-4 py-3">Tiempo estimado</th>
+                <th className="px-4 py-3">Contra entrega</th>
                 <th className="px-4 py-3">Estado</th>
                 <th className="px-4 py-3">Acciones</th>
               </tr>
@@ -91,6 +105,11 @@ export default function Zonas() {
                   <td className="px-4 py-3 font-medium text-navy">{zona.nombre}</td>
                   <td className="px-4 py-3">{formatoLempiras.format(Number(zona.costo_envio))}</td>
                   <td className="px-4 py-3 text-ink/70">{zona.tiempo_estimado}</td>
+                  <td className="px-4 py-3">
+                    <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${zona.acepta_contra_entrega ? 'bg-olive/20 text-olive-dark' : 'bg-ink/10 text-ink/60'}`}>
+                      {zona.acepta_contra_entrega ? 'Sí' : 'No'}
+                    </span>
+                  </td>
                   <td className="px-4 py-3">
                     <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${zona.activo ? 'bg-olive/20 text-olive-dark' : 'bg-ink/10 text-ink/60'}`}>
                       {zona.activo ? 'Activa' : 'Inactiva'}

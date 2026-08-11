@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Checkout from './pages/Checkout';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 
+const DejarOpinion = lazy(() => import('./pages/DejarOpinion'));
 const AdminLogin = lazy(() => import('./pages/admin/Login'));
 const AdminPedidos = lazy(() => import('./pages/admin/Pedidos'));
 const AdminPedidoDetalle = lazy(() => import('./pages/admin/PedidoDetalle'));
@@ -14,6 +15,7 @@ const AdminCupones = lazy(() => import('./pages/admin/Cupones'));
 const AdminZonas = lazy(() => import('./pages/admin/Zonas'));
 const AdminReportes = lazy(() => import('./pages/admin/Reportes'));
 const AdminUsuarios = lazy(() => import('./pages/admin/Usuarios'));
+const AdminOpiniones = lazy(() => import('./pages/admin/Opiniones'));
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
 
 function Cargando() {
@@ -47,6 +49,16 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
+  {
+    path: '/opinion',
+    element: (
+      <Layout>
+        <Suspense fallback={<Cargando />}>
+          <DejarOpinion />
+        </Suspense>
+      </Layout>
+    ),
+  },
   { path: '/admin', element: <Navigate to="/admin/pedidos" replace /> },
   {
     path: '/admin/login',
@@ -64,6 +76,7 @@ const router = createBrowserRouter([
   { path: '/admin/zonas', element: adminRoute(<AdminZonas />) },
   { path: '/admin/reportes', element: adminRoute(<AdminReportes />) },
   { path: '/admin/usuarios', element: adminRoute(<AdminUsuarios />) },
+  { path: '/admin/opiniones', element: adminRoute(<AdminOpiniones />) },
 ]);
 
 export default router;

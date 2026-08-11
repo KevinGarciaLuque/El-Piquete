@@ -54,6 +54,13 @@ export default function Checkout() {
 
   const zonaSeleccionada = zonas.find((zona) => String(zona.id) === String(datos.zonaEntregaId));
   const costoEnvio = datos.metodoEntrega === 'domicilio' && zonaSeleccionada ? Number(zonaSeleccionada.costo_envio) : 0;
+  const contraEntregaDisponible = datos.metodoEntrega === 'recoger' || Boolean(zonaSeleccionada?.acepta_contra_entrega);
+
+  useEffect(() => {
+    if (!contraEntregaDisponible && datos.metodoPago === 'contra_entrega') {
+      actualizar({ metodoPago: '' });
+    }
+  }, [contraEntregaDisponible, datos.metodoPago]);
 
   function esPasoValido() {
     if (paso === 1) return datos.nombre.trim() && datos.telefono.trim();
@@ -110,7 +117,9 @@ export default function Checkout() {
 
       {paso === 1 && <StepDatosCliente datos={datos} actualizar={actualizar} />}
       {paso === 2 && <StepEntrega datos={datos} actualizar={actualizar} zonas={zonas} cargandoZonas={cargandoZonas} />}
-      {paso === 3 && <StepPago datos={datos} actualizar={actualizar} />}
+      {paso === 3 && (
+        <StepPago datos={datos} actualizar={actualizar} contraEntregaDisponible={contraEntregaDisponible} />
+      )}
       {paso === 4 && (
         <StepResumen
           items={items}

@@ -2,7 +2,7 @@ import logo from '../../assets/logo.webp';
 
 export default function Historia() {
   return (
-    <section id="nosotros" className="bg-navy py-16 text-cream">
+    <section id="nosotros" className="scroll-mt-24 bg-navy py-16 text-cream">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <span className="text-xs font-semibold uppercase tracking-wider text-carrot">Nuestra historia</span>

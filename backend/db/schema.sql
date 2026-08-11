@@ -76,8 +76,12 @@ CREATE TABLE IF NOT EXISTS zonas_entrega (
   nombre VARCHAR(120) NOT NULL,
   costo_envio DECIMAL(10, 2) NOT NULL DEFAULT 0,
   tiempo_estimado VARCHAR(60),
-  activo BOOLEAN NOT NULL DEFAULT TRUE
+  activo BOOLEAN NOT NULL DEFAULT TRUE,
+  acepta_contra_entrega BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+-- Si la base de datos ya existía antes de este campo, esto la actualiza sin perder datos (MySQL 8.0.29+).
+ALTER TABLE zonas_entrega ADD COLUMN IF NOT EXISTS acepta_contra_entrega BOOLEAN NOT NULL DEFAULT TRUE;
 
 CREATE TABLE IF NOT EXISTS clientes (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -159,4 +163,25 @@ CREATE TABLE IF NOT EXISTS pagos (
   estado ENUM('pendiente', 'confirmado', 'rechazado') NOT NULL DEFAULT 'pendiente',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_pagos_pedido FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE
+);
+
+-- ---------------------------------------------------------------------------
+-- Opiniones
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS opiniones (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  pedido_id INT NULL,
+  cliente_id INT NULL,
+  nombre VARCHAR(120) NOT NULL,
+  calificacion TINYINT NOT NULL,
+  comentario TEXT NOT NULL,
+  foto_url VARCHAR(255),
+  estado ENUM('pendiente', 'aprobada', 'rechazada') NOT NULL DEFAULT 'pendiente',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  moderado_en TIMESTAMP NULL,
+  CONSTRAINT fk_opiniones_pedido FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE SET NULL,
+  CONSTRAINT fk_opiniones_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE SET NULL,
+  CONSTRAINT uq_opinion_pedido UNIQUE (pedido_id),
+  CONSTRAINT chk_opinion_calificacion CHECK (calificacion BETWEEN 1 AND 5)
 );

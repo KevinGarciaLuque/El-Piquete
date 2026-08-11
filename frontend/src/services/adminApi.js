@@ -169,5 +169,35 @@ export async function eliminarUsuarioAdmin(id) {
   return data;
 }
 
+// Opiniones
+export async function obtenerOpinionesAdmin(estado) {
+  const { data } = await adminApi.get('/admin/opiniones', { params: estado ? { estado } : undefined });
+  return data;
+}
+
+export async function crearOpinionAdmin(payload) {
+  const { data } = await adminApi.post('/admin/opiniones', payload);
+  return data;
+}
+
+export async function actualizarOpinionAdmin(id, payload) {
+  const { data } = await adminApi.put(`/admin/opiniones/${id}`, payload);
+  return data;
+}
+
+export async function eliminarOpinionAdmin(id) {
+  const { data } = await adminApi.delete(`/admin/opiniones/${id}`);
+  return data;
+}
+
+export async function subirFotoOpinionAdmin(id, archivo) {
+  const formData = new FormData();
+  formData.append('imagen', archivo);
+  const { data } = await adminApi.post(`/admin/opiniones/${id}/imagen`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data;
+}
+
 export { TOKEN_KEY };
 export default adminApi;

@@ -19,4 +19,16 @@ export async function crearPedido(payload) {
   return data;
 }
 
+export async function obtenerOpiniones() {
+  const { data } = await api.get('/opiniones');
+  return data;
+}
+
+export async function enviarOpinion(formData) {
+  const { data } = await api.post('/opiniones', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data;
+}
+
 export default api;

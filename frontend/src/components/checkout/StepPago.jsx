@@ -14,7 +14,7 @@ function OpcionPago({ valor, actual, disabled, titulo, descripcion, onSelect }) 
   );
 }
 
-export default function StepPago({ datos, actualizar }) {
+export default function StepPago({ datos, actualizar, contraEntregaDisponible }) {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-display text-2xl font-semibold text-navy">Método de pago</h2>
@@ -37,9 +37,10 @@ export default function StepPago({ datos, actualizar }) {
         <OpcionPago
           valor="contra_entrega"
           actual={datos.metodoPago}
+          disabled={!contraEntregaDisponible}
           onSelect={(valor) => actualizar({ metodoPago: valor })}
           titulo="Pago contra entrega"
-          descripcion="Pagas al recibir o recoger tu pedido"
+          descripcion={contraEntregaDisponible ? 'Pagas al recibir o recoger tu pedido' : 'No disponible para tu zona de entrega'}
         />
         <OpcionPago valor="paypal" actual={datos.metodoPago} disabled titulo="PayPal" descripcion="Próximamente" onSelect={() => {}} />
       </div>

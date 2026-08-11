@@ -1,20 +1,25 @@
 import { motion } from 'framer-motion';
 
-export default function VeggieAccent({ src, side = 'left', className = '' }) {
-  const offset = side === 'left' ? -100 : 100;
+export default function VeggieAccent({ src, side = 'left', className = '', style }) {
+  const slideOffset = side === 'left' ? -40 : 40;
 
   return (
-    <motion.img
-      src={src}
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      decoding="async"
-      initial={{ opacity: 0, x: offset }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 'some' }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`pointer-events-none absolute hidden select-none lg:block ${side === 'left' ? 'left-0' : 'right-0'} ${className}`}
-    />
+    <div
+      style={style}
+      className={`pointer-events-none absolute select-none ${side === 'left' ? 'left-0' : 'right-0'} ${className}`}
+    >
+      <motion.img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        initial={{ opacity: 0, x: slideOffset }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 'some' }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="block w-full"
+      />
+    </div>
   );
 }

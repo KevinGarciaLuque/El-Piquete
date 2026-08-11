@@ -74,10 +74,13 @@ async function crearPedido(req, res, next) {
 
     if (metodoEntrega === 'domicilio') {
       const [[zona]] = await conn.query(
-        'SELECT costo_envio, tiempo_estimado FROM zonas_entrega WHERE id = ? AND activo = TRUE',
+        'SELECT costo_envio, tiempo_estimado, acepta_contra_entrega FROM zonas_entrega WHERE id = ? AND activo = TRUE',
         [zonaEntregaId],
       );
       if (!zona) throw errorHttp(400, 'Zona de entrega inválida');
+      if (metodoPago === 'contra_entrega' && !zona.acepta_contra_entrega) {
+        throw errorHttp(400, 'Pago contra entrega no disponible para esta zona');
+      }
       costoEnvio = Number(zona.costo_envio);
       tiempoEstimado = zona.tiempo_estimado;
     }

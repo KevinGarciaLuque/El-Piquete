@@ -2,7 +2,7 @@ import ProductCard from '../ui/ProductCard';
 
 export default function Productos({ productos, estado }) {
   return (
-    <section id="productos" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section id="productos" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6">
       <div className="mb-10 max-w-xl">
         <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Productos destacados</h2>
         <p className="mt-3 text-ink/70">

@@ -28,7 +28,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="inicio" className="relative overflow-hidden bg-cream pt-10 sm:pt-16">
+    <section id="inicio" className="relative scroll-mt-24 overflow-hidden bg-cream pt-10 sm:pt-16">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 sm:px-6 md:grid-cols-2 md:gap-8 md:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

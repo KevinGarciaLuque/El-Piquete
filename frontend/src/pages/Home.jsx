@@ -3,6 +3,7 @@ import Productos from '../components/sections/Productos';
 import Combos from '../components/sections/Combos';
 import Beneficios from '../components/sections/Beneficios';
 import Historia from '../components/sections/Historia';
+import Opiniones from '../components/sections/Opiniones';
 import Preguntas from '../components/sections/Preguntas';
 import useProductos from '../hooks/useProductos';
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Combos combos={combos} estado={estado} />
       <Beneficios />
       <Historia />
+      <Opiniones />
       <Preguntas />
     </>
   );

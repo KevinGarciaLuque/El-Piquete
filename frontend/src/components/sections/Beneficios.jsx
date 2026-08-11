@@ -35,11 +35,21 @@ const BENEFICIOS = [
 
 export default function Beneficios() {
   return (
-    <section className="relative overflow-hidden py-24 lg:py-32">
-      <VeggieAccent src={jalapeno} side="left" className="top-1/2 w-56 -translate-x-1/3 -translate-y-1/2 opacity-90 sm:w-64 xl:w-80" />
-      <VeggieAccent src={cebolla} side="right" className="top-1/2 w-56 -translate-y-1/2 translate-x-1/3 opacity-90 sm:w-64 xl:w-80" />
+    <section className="relative overflow-hidden py-28 lg:py-40">
+      <VeggieAccent
+        src={jalapeno}
+        side="left"
+        className="top-0 -translate-x-[38%] opacity-90"
+        style={{ width: 'clamp(90px, calc((100vw - 1280px) * 0.9 + 90px), 820px)' }}
+      />
+      <VeggieAccent
+        src={cebolla}
+        side="right"
+        className="top-0 translate-x-[38%] opacity-90"
+        style={{ width: 'clamp(90px, calc((100vw - 1280px) * 0.9 + 90px), 820px)' }}
+      />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 xl:px-24">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-16 xl:px-24">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {BENEFICIOS.map((beneficio) => (
             <div key={beneficio.titulo} className="flex flex-col items-start gap-3">

@@ -56,7 +56,7 @@ function PreguntaItem({ pregunta, respuesta }) {
 
 export default function Preguntas() {
   return (
-    <section id="preguntas" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <section id="preguntas" className="mx-auto max-w-3xl scroll-mt-24 px-4 py-16 sm:px-6">
       <h2 className="mb-8 font-display text-3xl font-semibold text-navy sm:text-4xl">Preguntas frecuentes</h2>
       <div>
         {PREGUNTAS.map((item) => (

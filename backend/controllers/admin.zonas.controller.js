@@ -17,15 +17,15 @@ async function listarZonasAdmin(req, res, next) {
 
 async function crearZona(req, res, next) {
   try {
-    const { nombre, costo_envio, tiempo_estimado } = req.body;
+    const { nombre, costo_envio, tiempo_estimado, acepta_contra_entrega } = req.body;
 
     if (!nombre || costo_envio === undefined) {
       return next(errorHttp(400, 'Nombre y costo de envío son obligatorios'));
     }
 
     const [resultado] = await pool.query(
-      'INSERT INTO zonas_entrega (nombre, costo_envio, tiempo_estimado) VALUES (?, ?, ?)',
-      [nombre, costo_envio, tiempo_estimado || null],
+      'INSERT INTO zonas_entrega (nombre, costo_envio, tiempo_estimado, acepta_contra_entrega) VALUES (?, ?, ?, ?)',
+      [nombre, costo_envio, tiempo_estimado || null, acepta_contra_entrega ?? true],
     );
 
     res.status(201).json({ id: resultado.insertId });
@@ -36,7 +36,7 @@ async function crearZona(req, res, next) {
 
 async function actualizarZona(req, res, next) {
   try {
-    const campos = ['nombre', 'costo_envio', 'tiempo_estimado', 'activo'];
+    const campos = ['nombre', 'costo_envio', 'tiempo_estimado', 'activo', 'acepta_contra_entrega'];
     const actualizaciones = [];
     const valores = [];
 

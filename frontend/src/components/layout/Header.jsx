@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.webp';
 import Button from '../ui/Button';
@@ -43,7 +43,26 @@ function CartIcon({ count, onClick }) {
 
 export default function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [seccionActiva, setSeccionActiva] = useState('inicio');
   const { totalItems, alternarCarrito } = useCart();
+
+  useEffect(() => {
+    const secciones = NAV_LINKS.map((link) => document.getElementById(link.href.slice(1))).filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSeccionActiva(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    );
+
+    secciones.forEach((seccion) => observer.observe(seccion));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-olive/15 bg-cream/95 backdrop-blur">
@@ -53,15 +72,25 @@ export default function Header() {
         </a>
 
         <nav className="hidden items-center gap-6 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-ink/80 transition-colors hover:text-chili"
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const activo = seccionActiva === link.href.slice(1);
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`group relative py-1 text-sm font-medium transition-colors duration-200 hover:text-chili ${
+                  activo ? 'text-chili' : 'text-ink/80'
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute -bottom-0.5 left-0 h-0.5 rounded-full bg-chili transition-all duration-300 ease-out group-hover:w-full ${
+                    activo ? 'w-full' : 'w-0'
+                  }`}
+                />
+              </a>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -104,7 +133,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuAbierto(false)}
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-ink/80 hover:bg-olive/10 hover:text-chili"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-ink/80 transition-all duration-200 hover:translate-x-1 hover:bg-olive/10 hover:text-chili"
                 >
                   {link.label}
                 </a>
