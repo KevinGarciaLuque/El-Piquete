@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.webp';
 
 export default function Footer() {
@@ -26,11 +27,11 @@ export default function Footer() {
 
         <div className="flex flex-col gap-2 text-sm">
           <h3 className="mb-1 font-display text-base font-semibold">Enlaces</h3>
-          <a href="#productos" className="text-cream/80 hover:text-cream">Productos</a>
-          <a href="#combos" className="text-cream/80 hover:text-cream">Combos</a>
-          <a href="#opiniones" className="text-cream/80 hover:text-cream">Opiniones</a>
-          <a href="#preguntas" className="text-cream/80 hover:text-cream">Preguntas frecuentes</a>
-          <a href="/opinion" className="text-cream/80 hover:text-cream">Déjanos tu opinión</a>
+          <Link to="/#productos" className="text-cream/80 hover:text-cream">Productos</Link>
+          <Link to="/#combos" className="text-cream/80 hover:text-cream">Combos</Link>
+          <Link to="/#opiniones" className="text-cream/80 hover:text-cream">Opiniones</Link>
+          <Link to="/#preguntas" className="text-cream/80 hover:text-cream">Preguntas frecuentes</Link>
+          <Link to="/opinion" className="text-cream/80 hover:text-cream">Déjanos tu opinión</Link>
         </div>
       </div>
 

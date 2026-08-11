@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import Button from '../ui/Button';
 import { buildWhatsAppLink } from '../../lib/whatsapp';
@@ -73,7 +73,7 @@ export default function CartDrawer() {
             {items.length === 0 ? (
               <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
                 <p className="text-ink/70">Tu carrito está vacío.</p>
-                <Button variant="primary" onClick={cerrarCarrito} as="a" href="#productos">
+                <Button variant="primary" onClick={cerrarCarrito} as={Link} to="/#productos">
                   Ver productos
                 </Button>
               </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.webp';
 import Button from '../ui/Button';
@@ -67,17 +68,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-olive/15 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <a href="#inicio" className="flex items-center gap-2">
+        <Link to="/#inicio" className="flex items-center gap-2">
           <img src={logo} alt="Encurtidos El Piquete" width="56" height="56" fetchPriority="high" className="h-12 w-12 rounded-full object-cover sm:h-14 sm:w-14" />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
           {NAV_LINKS.map((link) => {
             const activo = seccionActiva === link.href.slice(1);
             return (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={`/${link.href}`}
                 className={`group relative py-1 text-sm font-medium transition-colors duration-200 hover:text-chili ${
                   activo ? 'text-chili' : 'text-ink/80'
                 }`}
@@ -88,14 +89,14 @@ export default function Header() {
                     activo ? 'w-full' : 'w-0'
                   }`}
                 />
-              </a>
+              </Link>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <span className="hidden sm:inline-flex">
-            <Button as="a" href="#productos" variant="primary">
+            <Button as={Link} to="/#productos" variant="primary">
               Comprar ahora
             </Button>
           </span>
@@ -129,16 +130,16 @@ export default function Header() {
           >
             <div className="flex flex-col gap-1 px-4 py-3">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={`/${link.href}`}
                   onClick={() => setMenuAbierto(false)}
                   className="rounded-lg px-3 py-2 text-sm font-medium text-ink/80 transition-all duration-200 hover:translate-x-1 hover:bg-olive/10 hover:text-chili"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <Button as="a" href="#productos" variant="primary" className="mt-2 justify-center" onClick={() => setMenuAbierto(false)}>
+              <Button as={Link} to="/#productos" variant="primary" className="mt-2 justify-center" onClick={() => setMenuAbierto(false)}>
                 Comprar ahora
               </Button>
             </div>
