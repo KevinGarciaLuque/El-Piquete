@@ -15,7 +15,14 @@ export default function Home() {
 
   useEffect(() => {
     if (!location.hash) return;
-    document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+    const id = location.hash.slice(1);
+    // Se espera a que termine de cerrarse el menú móvil (animación de 250ms) antes de
+    // calcular la posición de scroll; si no, el cálculo incluye el espacio del menú
+    // todavía abierto y el scroll se pasa de largo una vez este colapsa.
+    const timer = setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+    return () => clearTimeout(timer);
   }, [location.hash]);
 
   return (
