@@ -20,7 +20,7 @@ function CartIcon({ count, onClick }) {
       type="button"
       onClick={onClick}
       aria-label="Carrito de compras"
-      className="relative flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-olive/10"
+      className="site-header__icono relative flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-olive/10"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h1.5l1.9 10.6a2 2 0 0 0 2 1.65h7.7a2 2 0 0 0 2-1.63L19.5 7.5H6" />
@@ -66,13 +66,13 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-olive/15 bg-cream/95 backdrop-blur">
+    <header className="site-header sticky top-0 z-50 border-b border-olive/15 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link to="/#inicio" className="flex items-center gap-2">
           <img src={logo} alt="Encurtidos El Piquete" width="56" height="56" fetchPriority="high" className="h-12 w-12 rounded-full object-cover sm:h-14 sm:w-14" />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="site-header__nav hidden items-center gap-6 lg:flex">
           {NAV_LINKS.map((link) => {
             const activo = seccionActiva === link.href.slice(1);
             return (
@@ -106,7 +106,7 @@ export default function Header() {
             aria-label="Abrir menú"
             aria-expanded={menuAbierto}
             onClick={() => setMenuAbierto((abierto) => !abierto)}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-navy hover:bg-olive/10 lg:hidden"
+            className="site-header__icono flex h-10 w-10 items-center justify-center rounded-full text-navy hover:bg-olive/10 lg:hidden"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-6 w-6">
               {menuAbierto ? (

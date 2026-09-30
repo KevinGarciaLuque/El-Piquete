@@ -27,6 +27,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
+        // La portada cinematográfica se descarga solo en escritorio; no se precachea en teléfonos.
+        globIgnores: ['**/cinematic/**'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/api/productos') || url.pathname.startsWith('/api/zonas-entrega'),

@@ -9,3 +9,6 @@ backend/uploads/productos/*
 !backend/uploads/productos/.gitkeep
 backend/uploads/opiniones/*
 !backend/uploads/opiniones/.gitkeep
+
+# Raw AI generations and review frames (never shipped)
+design/review/

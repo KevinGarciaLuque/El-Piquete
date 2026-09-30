@@ -1,0 +1,549 @@
+/* Portada cinematográfica de El Piquete.
+   Todo lo que se anima con el scroll usa solo transform y opacity, a partir de --k
+   (0 a 1, lo escribe el componente) para que el efecto sea reversible al subir. */
+
+.cine-hero,
+.cine-estatica {
+  --cine-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --cine-texto: #f4ede1;
+  --cine-sombra-texto: 0 1px 2px rgba(5, 9, 18, 0.95), 0 3px 12px rgba(5, 9, 18, 0.78), 0 10px 44px rgba(5, 9, 18, 0.8);
+  position: relative;
+  margin-top: calc(var(--cine-header, 0px) * -1);
+  background: var(--color-ep-night);
+  color: var(--cine-texto);
+  font-family: var(--font-ep-body);
+}
+
+.cine-hero {
+  height: 1000vh;
+}
+
+.cine-escenario {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cine-capa {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* El frasco final vive a la derecha: el recorte en pantallas anchas conserva su tapa. */
+  object-position: 62% 18%;
+}
+
+.cine-video {
+  opacity: 0;
+  transform: translateZ(0);
+  will-change: transform;
+  transition: opacity 0.8s var(--cine-ease);
+}
+
+.cine-escenario.con-video .cine-video {
+  opacity: 1;
+}
+
+.cine-escenario.sin-video .cine-video {
+  display: none;
+}
+
+.cine-imagen-final {
+  opacity: 0;
+  transition: opacity 0.9s var(--cine-ease);
+}
+
+.cine-escenario.muestra-final .cine-imagen-final {
+  opacity: 1;
+}
+
+/* Capa 1: oscurecimiento base, siempre presente, para que ningún cuadro quede crudo. */
+.cine-velo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(6, 10, 20, 0.55), rgba(6, 10, 20, 0) 20%),
+    radial-gradient(ellipse 120% 90% at 58% 45%, rgba(6, 10, 20, 0) 38%, rgba(6, 10, 20, 0.58) 100%);
+}
+
+/* Bandas de texto: columna izquierda, fuera del carril de acción del video. */
+.cine-banda {
+  position: absolute;
+  left: clamp(24px, 6.5vw, 112px);
+  top: 50%;
+  width: min(640px, 46vw);
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  isolation: isolate;
+  text-shadow: var(--cine-sombra-texto);
+}
+
+/* Capa 2: velo local que se intensifica solo mientras su banda está en pantalla. */
+.cine-banda::before {
+  content: '';
+  position: absolute;
+  inset: -40% -35% -40% -45%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: calc(0.25 + 0.75 * var(--k, 1));
+  background: radial-gradient(
+    ellipse 58% 54% at 42% 50%,
+    rgba(5, 9, 18, var(--velo-pico, 0.64)) 0%,
+    rgba(5, 9, 18, calc(var(--velo-pico, 0.64) * 0.68)) 46%,
+    rgba(5, 9, 18, 0) 76%
+  );
+}
+
+/* Velo más denso donde la película trae brillos bajo el texto (medido contra el peor cuadro). */
+.cine-banda--burbuja,
+.cine-banda--cierre {
+  --velo-pico: 0.72;
+}
+
+.cine-banda--empaque {
+  --velo-pico: 0.88;
+}
+
+.cine-banda[data-activa] {
+  pointer-events: auto;
+}
+
+/* Capa 4: etiquetas pequeñas con su propia pastilla. */
+.cine-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.1rem;
+  padding: 0.5em 0.9em;
+  border: 1px solid rgba(216, 183, 106, 0.28);
+  border-radius: 999px;
+  background: rgba(8, 12, 22, 0.52);
+  backdrop-filter: blur(10px);
+  color: var(--color-ep-brine);
+  font-family: var(--font-ep-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(5, 9, 18, 0.85);
+}
+
+.cine-caption,
+.cine-titular {
+  margin: 0;
+  color: var(--cine-texto);
+  font-family: var(--font-ep-display);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+}
+
+.cine-caption {
+  max-width: 13ch;
+  font-size: clamp(2.2rem, 4.4vw, 4.5rem);
+  line-height: 1.04;
+}
+
+.cine-split .w {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+}
+
+.cine-split .c {
+  display: inline-block;
+}
+
+/* Banda 1 · enfoque: una copia desenfocada cede ante la nítida (el desenfoque es fijo). */
+.cine-enfoque {
+  position: relative;
+}
+
+.cine-enfoque__nitido {
+  display: block;
+  opacity: var(--k, 0);
+  transform: scale(calc(1.04 - 0.04 * var(--k, 0)));
+  transform-origin: left center;
+}
+
+.cine-enfoque__suave {
+  position: absolute;
+  inset: 0;
+  filter: blur(10px);
+  opacity: calc((1 - var(--k, 0)) * 0.9);
+}
+
+/* Banda 2 · caída: las palabras bajan a su sitio como las tiras de zanahoria. */
+.cine-banda--caida .w {
+  --kc: clamp(0, (var(--k, 0) - var(--wth, 0) * 0.55) * 2.6, 1);
+  opacity: var(--kc);
+  transform: translateY(calc((1 - var(--kc)) * -0.45em));
+}
+
+/* Banda 3 · golpe: cada palabra entra con un pequeño rebote y subraya su ingrediente. */
+.cine-banda--golpe .w {
+  --th: calc(var(--wth, 0) * 0.66);
+  --kc: clamp(0, (var(--k, 0) - var(--th)) * 3, 1);
+  --ks: clamp(0, (var(--k, 0) - var(--th) - 0.12) * 3.2, 1);
+  opacity: var(--kc);
+  transform: scale(calc(0.6 + 0.54 * var(--kc) - 0.14 * var(--ks)));
+  transform-origin: left bottom;
+}
+
+.cine-banda--golpe .w::after {
+  content: '';
+  position: absolute;
+  left: 0.04em;
+  right: 0.3em;
+  bottom: 0.02em;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-ep-carrot);
+  transform: scaleX(var(--ks));
+  transform-origin: left;
+}
+
+.cine-banda--golpe .w:nth-child(2)::after {
+  background: #b15bb4;
+}
+
+.cine-banda--golpe .w:nth-child(3)::after {
+  background: #7fa33c;
+}
+
+/* Banda 4 · burbuja: las letras suben desde abajo con un leve vaivén. */
+.cine-banda--burbuja .c {
+  --kc: clamp(0, (var(--k, 0) - var(--th, 0)) * 2.4, 1);
+  opacity: var(--kc);
+  transform: translate(calc((1 - var(--kc)) * var(--jx, 0px)), calc((1 - var(--kc)) * 0.8em))
+    scale(calc(0.7 + 0.3 * var(--kc)));
+}
+
+/* Banda 5 · empaque: las letras llegan separadas y se aprietan, como el frasco al llenarse. */
+.cine-banda--empaque .c {
+  --kc: clamp(0, (var(--k, 0) - var(--ad, 0) * 0.35) * 1.9, 1);
+  opacity: calc(0.15 + 0.85 * var(--kc));
+  transform: translateX(calc((1 - var(--kc)) * var(--d, 0) * 3.2em));
+}
+
+/* Cierre: el titular sube palabra por palabra, luego el subtítulo, luego los botones. */
+.cine-banda--cierre {
+  width: min(680px, 48vw);
+}
+
+.cine-banda--cierre .cine-titular {
+  max-width: 15ch;
+  font-size: clamp(2.5rem, 4.4vw, 4.6rem);
+  line-height: 1.04;
+}
+
+.cine-banda--cierre .w {
+  --kc: clamp(0, (var(--k, 0) - var(--wth, 0) * 0.45) * 3, 1);
+  opacity: var(--kc);
+  transform: translateY(calc((1 - var(--kc)) * 0.55em));
+}
+
+.cine-subtitulo {
+  max-width: 40ch;
+  margin: 1.2rem 0 0;
+  color: rgba(244, 237, 225, 0.88);
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.cine-banda--cierre .cine-subtitulo {
+  --ks: clamp(0, (var(--k, 0) - 0.62) * 4, 1);
+  opacity: var(--ks);
+  transform: translateY(calc((1 - var(--ks)) * 12px));
+}
+
+.cine-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2rem;
+}
+
+.cine-banda--cierre .cine-acciones {
+  --kb: clamp(0, (var(--k, 0) - 0.76) * 5, 1);
+  opacity: var(--kb);
+  transform: translateY(calc((1 - var(--kb)) * 14px));
+}
+
+.cine-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.6em;
+  border-radius: 999px;
+  font-family: var(--font-ep-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-shadow: none;
+  transition:
+    background-color 0.3s var(--cine-ease),
+    border-color 0.3s var(--cine-ease),
+    transform 0.3s var(--cine-ease);
+}
+
+.cine-btn:focus-visible {
+  outline: 2px solid var(--color-ep-carrot);
+  outline-offset: 3px;
+}
+
+.cine-btn--primario {
+  background: var(--color-ep-chili);
+  box-shadow: 0 12px 30px -12px rgba(193, 39, 45, 0.7);
+  color: var(--color-ep-paper);
+}
+
+.cine-btn--primario:hover {
+  background: var(--color-ep-chili-hover);
+  transform: translateY(-1px);
+}
+
+.cine-btn--fantasma {
+  border: 1px solid rgba(236, 228, 214, 0.5);
+  background: rgba(8, 12, 22, 0.3);
+  backdrop-filter: blur(6px);
+  color: var(--cine-texto);
+}
+
+.cine-btn--fantasma:hover {
+  border-color: rgba(236, 228, 214, 0.85);
+  background: rgba(8, 12, 22, 0.5);
+}
+
+/* Recorrido: una línea fina a la derecha con una marca por escena. */
+.cine-recorrido {
+  position: absolute;
+  top: 50%;
+  right: clamp(16px, 2.6vw, 40px);
+  width: 2px;
+  height: 38vh;
+  transform: translateY(-50%);
+  background: rgba(236, 228, 214, 0.14);
+}
+
+.cine-recorrido__relleno {
+  position: absolute;
+  inset: 0;
+  background: var(--color-ep-carrot);
+  transform: scaleY(var(--p, 0));
+  transform-origin: top;
+}
+
+.cine-recorrido__marca {
+  position: absolute;
+  left: -3px;
+  width: 8px;
+  height: 1px;
+  background: rgba(236, 228, 214, 0.55);
+}
+
+/* Indicador inferior: anillo de carga del video que después invita a deslizar. */
+.cine-indicador {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  color: rgba(236, 228, 214, 0.72);
+  font-family: var(--font-ep-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: opacity 0.5s var(--cine-ease);
+}
+
+.cine-escenario.paso-inicio .cine-indicador {
+  opacity: 0;
+}
+
+.cine-anillo {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.cine-anillo__pista {
+  stroke: rgba(236, 228, 214, 0.18);
+  stroke-width: 2;
+}
+
+.cine-anillo__progreso {
+  stroke: var(--color-ep-carrot);
+  stroke-width: 2.5;
+  stroke-dasharray: 126;
+  stroke-dashoffset: var(--ld, 126);
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 0.2s linear, opacity 0.5s var(--cine-ease);
+}
+
+.cine-escenario.con-video .cine-anillo__progreso,
+.cine-escenario.sin-video .cine-anillo__progreso {
+  opacity: 0;
+}
+
+.cine-anillo__flecha {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.cine-escenario:not(.paso-inicio) .cine-anillo__flecha {
+  animation: cine-invitar 2.4s var(--cine-ease) -0.8s infinite;
+}
+
+@keyframes cine-invitar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* Ventanas bajas de escritorio: el scrub se queda, los adornos pequeños no. */
+@media (max-height: 700px) {
+  .cine-banda {
+    top: calc(50% + var(--cine-header, 0px) / 2);
+  }
+
+  .cine-banda--cierre .cine-titular {
+    font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+  }
+
+  .cine-banda--cierre .cine-subtitulo {
+    margin-top: 0.8rem;
+  }
+
+  .cine-banda--cierre .cine-acciones {
+    margin-top: 1.3rem;
+  }
+}
+
+@media (max-height: 560px) {
+  .cine-recorrido,
+  .cine-indicador {
+    display: none;
+  }
+}
+
+/* Portada fija: teléfonos, tabletas en vertical y "reducir movimiento". */
+.cine-estatica {
+  display: grid;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.cine-estatica__media {
+  position: absolute;
+  inset: 0;
+}
+
+.cine-estatica__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 18%;
+}
+
+.cine-estatica__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(6, 10, 20, 0.55), rgba(6, 10, 20, 0) 22%),
+    radial-gradient(ellipse 70% 80% at 18% 55%, rgba(5, 9, 18, 0.72), rgba(5, 9, 18, 0) 70%);
+}
+
+.cine-estatica__texto {
+  position: relative;
+  align-self: center;
+  width: min(680px, 50vw);
+  padding: calc(var(--cine-header, 0px) + 32px) clamp(24px, 6.5vw, 112px) 48px;
+  text-shadow: var(--cine-sombra-texto);
+}
+
+.cine-estatica .cine-titular {
+  max-width: 15ch;
+  font-size: clamp(2.4rem, 4.4vw, 4.6rem);
+  line-height: 1.04;
+}
+
+@media (orientation: portrait), (max-width: 720px) {
+  .cine-estatica {
+    display: block;
+    min-height: 0;
+  }
+
+  .cine-estatica__media {
+    position: relative;
+    height: 64svh;
+    min-height: 360px;
+  }
+
+  .cine-estatica__media img {
+    object-position: 50% 35%;
+  }
+
+  .cine-estatica__media::after {
+    background:
+      linear-gradient(to bottom, rgba(6, 10, 20, 0.5), rgba(6, 10, 20, 0) 18%),
+      linear-gradient(to top, var(--color-ep-night) 2%, rgba(14, 23, 38, 0) 34%);
+  }
+
+  .cine-estatica__texto {
+    width: auto;
+    margin-top: -56px;
+    padding: 0 20px 48px;
+  }
+
+  .cine-estatica .cine-titular {
+    font-size: clamp(2.3rem, 10vw, 3.4rem);
+  }
+}
+
+@media (pointer: coarse) {
+  .cine-btn {
+    min-height: 48px;
+  }
+}
+
+/* Header sobre la portada: vidrio oscuro en lugar de crema. */
+.site-header {
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+html[data-hero-activo] .site-header {
+  border-color: transparent;
+  background: rgba(10, 16, 28, 0.42);
+  backdrop-filter: blur(12px);
+}
+
+html[data-hero-activo] .site-header__nav a,
+html[data-hero-activo] .site-header__icono {
+  color: rgba(244, 237, 225, 0.86);
+}
+
+html[data-hero-activo] .site-header__nav a:hover {
+  color: #fff;
+}
+
+html[data-hero-activo] .site-header__icono:hover {
+  background: rgba(244, 237, 225, 0.1);
+}

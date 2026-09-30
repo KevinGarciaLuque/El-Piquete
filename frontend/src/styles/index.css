@@ -7,6 +7,38 @@
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
 
+/* Tipografías de la tienda (rediseño cinematográfico): solo subconjuntos latinos. */
+@import "@fontsource/young-serif/latin-400.css";
+@import "@fontsource/young-serif/latin-ext-400.css";
+@import "@fontsource/figtree/latin-400.css";
+@import "@fontsource/figtree/latin-ext-400.css";
+@import "@fontsource/figtree/latin-500.css";
+@import "@fontsource/figtree/latin-ext-500.css";
+@import "@fontsource/figtree/latin-600.css";
+@import "@fontsource/figtree/latin-ext-600.css";
+@import "@fontsource/dm-mono/latin-400.css";
+@import "@fontsource/dm-mono/latin-500.css";
+
+/* Tokens del rediseño con prefijo ep: los existentes siguen intactos para checkout y admin. */
+@theme static {
+  --font-ep-display: "Young Serif", Georgia, serif;
+  --font-ep-body: "Figtree", system-ui, sans-serif;
+  --font-ep-mono: "DM Mono", ui-monospace, monospace;
+
+  --color-ep-night: #0e1726;
+  --color-ep-night-2: #16233a;
+  --color-ep-cream: #f3eadb;
+  --color-ep-paper: #fbf6ec;
+  --color-ep-carrot: #e4772e;
+  --color-ep-jalapeno: #4d6a2a;
+  --color-ep-chili: #c1272d;
+  --color-ep-chili-hover: #a81f25;
+  --color-ep-brine: #d8b76a;
+  --color-ep-ink: #1c1b19;
+  --color-ep-ink-2: #5b564e;
+  --color-ep-fog: #ece4d6;
+}
+
 @theme {
   --font-display: "Fraunces", serif;
   --font-body: "Inter", sans-serif;
@@ -19,6 +51,12 @@
   --color-magenta: #e0207a;
   --color-navy: #1b2a4a;
   --color-ink: #2b2a28;
+}
+
+/* clip (no hidden) evita el desplazamiento lateral sin romper los elementos sticky. */
+html,
+body {
+  overflow-x: clip;
 }
 
 body {

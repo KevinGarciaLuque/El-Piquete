@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Hero from '../components/sections/Hero';
+import CinematicHero from '../components/sections/CinematicHero';
 import Productos from '../components/sections/Productos';
 import Combos from '../components/sections/Combos';
 import Beneficios from '../components/sections/Beneficios';
@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      <CinematicHero />
       <Productos productos={individuales} estado={estado} />
       <Combos combos={combos} estado={estado} />
       <Beneficios />
