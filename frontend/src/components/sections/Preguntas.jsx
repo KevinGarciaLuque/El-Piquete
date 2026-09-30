@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import Reveal from '../ui/Reveal';
+import { Aparecer, TituloRevelado } from '../tienda/Revelar';
+import { EASE_EP } from '../../lib/tienda';
 
 const PREGUNTAS = [
   {
@@ -37,47 +38,57 @@ const PREGUNTAS = [
   },
 ];
 
-function PreguntaItem({ pregunta, respuesta, delay = 0 }) {
+function PreguntaItem({ pregunta, respuesta }) {
   const [abierta, setAbierta] = useState(false);
+  const id = useId();
 
   return (
-    <Reveal delay={delay} className="border-b border-olive/15">
-      <button
-        type="button"
-        onClick={() => setAbierta((valor) => !valor)}
-        aria-expanded={abierta}
-        className="flex w-full items-center justify-between gap-4 py-4 text-left"
-      >
-        <span className="font-medium text-navy">{pregunta}</span>
-        <span className={`shrink-0 text-olive-dark transition-transform ${abierta ? 'rotate-45' : ''}`}>+</span>
-      </button>
+    <div className={`ep-pregunta ${abierta ? 'ep-pregunta--abierta' : ''}`}>
+      <h3>
+        <button
+          type="button"
+          onClick={() => setAbierta((valor) => !valor)}
+          aria-expanded={abierta}
+          aria-controls={id}
+          className="ep-pregunta__boton"
+        >
+          <span>{pregunta}</span>
+          <span className="ep-pregunta__signo" aria-hidden="true" />
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {abierta && (
           <motion.div
+            id={id}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="overflow-hidden"
+            transition={{ duration: 0.35, ease: EASE_EP }}
+            className="ep-pregunta__respuesta"
           >
-            <p className="pb-4 text-sm text-ink/70">{respuesta}</p>
+            <p>{respuesta}</p>
           </motion.div>
         )}
       </AnimatePresence>
-    </Reveal>
+    </div>
   );
 }
 
 export default function Preguntas() {
   return (
-    <section id="preguntas" className="mx-auto max-w-3xl scroll-mt-24 px-4 py-16 sm:px-6">
-      <Reveal as="h2" className="mb-8 font-display text-3xl font-semibold text-navy sm:text-4xl">
-        Preguntas frecuentes
-      </Reveal>
-      <div>
-        {PREGUNTAS.map((item, index) => (
-          <PreguntaItem key={item.pregunta} {...item} delay={index * 0.05} />
-        ))}
+    <section id="preguntas" className="ep-seccion ep-preguntas scroll-mt-24">
+      <div className="ep-contenedor ep-preguntas__grid">
+        <div className="ep-preguntas__fijo">
+          <Aparecer as="p" className="ep-kicker" y={12}>
+            10 · Preguntas
+          </Aparecer>
+          <TituloRevelado texto="Preguntas frecuentes" />
+        </div>
+        <Aparecer className="ep-preguntas__lista">
+          {PREGUNTAS.map((item) => (
+            <PreguntaItem key={item.pregunta} {...item} />
+          ))}
+        </Aparecer>
       </div>
     </section>
   );

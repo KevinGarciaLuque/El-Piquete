@@ -21,6 +21,13 @@ const TITULAR = 'El sabor que transforma cada comida.';
 const SUBTITULO = 'Encurtidos artesanales preparados con ingredientes frescos y el nivel de picante perfecto.';
 
 const IMAGEN_FINAL = '/cinematic/hero-ending.webp';
+
+// Tres cuadros de la película para la portada fija de teléfonos.
+const TIRA = [
+  { imagen: '/media/tira-1-fresco.webp', texto: 'Todo comienza fresco.' },
+  { imagen: '/media/tira-2-salmuera.webp', texto: 'El equilibrio está en cada detalle.' },
+  { imagen: '/media/tira-3-frasco.webp', texto: 'Preparado artesanalmente.' },
+];
 const SUAVIZADO = 0.16; // por cuadro a 60 fps; se normaliza para pantallas de 120 Hz
 
 const limitar = (valor, minimo, maximo) => Math.min(maximo, Math.max(minimo, valor));
@@ -66,7 +73,7 @@ function Acciones({ refAcciones, primero }) {
     </Link>
   );
   const descubrir = (
-    <Link key="descubrir" to="/#productos" className={`cine-btn ${primero === 'descubrir' ? 'cine-btn--primario' : 'cine-btn--fantasma'}`}>
+    <Link key="descubrir" to="/#picante" className={`cine-btn ${primero === 'descubrir' ? 'cine-btn--primario' : 'cine-btn--fantasma'}`}>
       Descubrir El Piquete
     </Link>
   );
@@ -435,6 +442,17 @@ function HeroEstatico() {
         <h1 className="cine-titular">{TITULAR}</h1>
         <p className="cine-subtitulo">{SUBTITULO}</p>
         <Acciones primero="comprar" />
+      </div>
+      <div className="cine-tira">
+        <p className="cine-etiqueta">De la tabla al frasco</p>
+        <ol className="cine-tira__lista">
+          {TIRA.map((cuadro) => (
+            <li key={cuadro.imagen} className="cine-tira__cuadro">
+              <img src={cuadro.imagen} alt="" width="720" height="900" loading="lazy" decoding="async" />
+              <span>{cuadro.texto}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

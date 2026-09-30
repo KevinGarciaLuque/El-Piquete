@@ -1,45 +1,41 @@
-import ProductCard from '../ui/ProductCard';
-import VeggieAccent from '../ui/VeggieAccent';
-import Reveal from '../ui/Reveal';
-import zanahoria from '../../assets/zanahoria.webp';
+import { Encabezado } from '../tienda/Revelar';
+import TarjetaProducto from '../tienda/TarjetaProducto';
+import LineaSalmuera from '../tienda/LineaSalmuera';
+import { tieneFotoPropia } from '../../lib/tienda';
+import { AvisoSinCatalogo, TarjetasCargando } from './Productos';
 
+// El combo para negocio vive en su propia sección (Negocios); aquí van los de casa.
 export default function Combos({ combos, estado }) {
+  const deCasa = combos.filter((combo) => combo.slug !== 'combo-negocio');
+
   return (
-    <section id="combos" className="relative scroll-mt-24 overflow-hidden bg-olive/8 py-20 lg:py-28">
-      <VeggieAccent
-        src={zanahoria}
-        side="right"
-        className="top-0 translate-x-1/4 opacity-90"
-        style={{ width: 'clamp(170px, 46vw, 960px)' }}
-      />
+    <section id="combos" className="ep-seccion ep-combos scroll-mt-24">
+      <LineaSalmuera tono="crema" />
+      <div className="ep-contenedor">
+        <Encabezado
+          kicker="05 · Para compartir"
+          titulo="Arma tu mesa."
+          lede="Combos para probar los tres niveles o tener siempre un frasco a mano."
+        />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        <Reveal className="mb-10 max-w-xl">
-          <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Combos</h2>
-          <p className="mt-3 text-ink/70">
-            Combos pensados para probar, compartir en familia y abastecer tu negocio.
-          </p>
-        </Reveal>
-
-        {estado === 'cargando' && <p className="text-sm text-ink/60">Cargando combos…</p>}
-        {estado === 'error' && (
-          <p className="text-sm text-chili">
-            No pudimos cargar los combos en este momento. Verifica que el backend esté corriendo.
-          </p>
-        )}
+        {estado === 'cargando' && <TarjetasCargando cantidad={2} />}
+        {estado === 'error' && <AvisoSinCatalogo que="los combos" />}
 
         {estado === 'listo' && (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {combos.map((combo, indice) => (
-              <ProductCard
-                key={combo.id}
-                producto={combo}
-                index={indice}
-                cotizacion={combo.slug === 'combo-negocio'}
-                etiquetaPicante={combo.slug === 'combo-para-probar' ? 'Variedad de niveles 🌶️' : undefined}
-              />
-            ))}
-          </div>
+          <>
+            <div className="ep-combos__rejilla">
+              {deCasa.map((combo, indice) => (
+                <TarjetaProducto
+                  key={combo.id}
+                  producto={combo}
+                  formato="paquete"
+                  retraso={indice * 0.12}
+                  etiquetaPicante={combo.slug === 'combo-para-probar' ? 'Suave, tradicional y picante' : undefined}
+                />
+              ))}
+            </div>
+            {deCasa.some((combo) => !tieneFotoPropia(combo)) && <p className="ep-nota">Imágenes de referencia.</p>}
+          </>
         )}
       </div>
     </section>

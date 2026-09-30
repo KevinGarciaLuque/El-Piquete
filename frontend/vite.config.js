@@ -16,7 +16,7 @@ export default defineConfig({
         short_name: 'El Piquete',
         description: 'Encurtidos artesanales frescos, crujientes y con el nivel de picante perfecto.',
         lang: 'es',
-        theme_color: '#3e4a28',
+        theme_color: '#0e1726',
         background_color: '#fbf3e7',
         display: 'standalone',
         start_url: '/',
@@ -27,8 +27,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
-        // La portada cinematográfica se descarga solo en escritorio; no se precachea en teléfonos.
-        globIgnores: ['**/cinematic/**'],
+        // La portada cinematográfica y las fotos de las secciones se cargan bajo demanda;
+        // precachearlas haría que cada teléfono descargue todo en segundo plano.
+        globIgnores: ['**/cinematic/**', '**/media/**'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/api/productos') || url.pathname.startsWith('/api/zonas-entrega'),

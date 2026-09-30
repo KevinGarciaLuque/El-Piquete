@@ -1,13 +1,20 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import CinematicHero from '../components/sections/CinematicHero';
 import Productos from '../components/sections/Productos';
+import Picante from '../components/sections/Picante';
+import Ingredientes from '../components/sections/Ingredientes';
+import ConQueSeCome from '../components/sections/ConQueSeCome';
 import Combos from '../components/sections/Combos';
-import Beneficios from '../components/sections/Beneficios';
 import Historia from '../components/sections/Historia';
+import Proceso from '../components/sections/Proceso';
+import Negocios from '../components/sections/Negocios';
 import Opiniones from '../components/sections/Opiniones';
 import Preguntas from '../components/sections/Preguntas';
+import Cierre from '../components/sections/Cierre';
 import useProductos from '../hooks/useProductos';
+import '../components/tienda/tienda.css';
 
 export default function Home() {
   const { individuales, combos, estado } = useProductos();
@@ -25,15 +32,33 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [location.hash]);
 
+  // Con la pestaña oculta se pausan todas las animaciones decorativas en bucle.
+  useEffect(() => {
+    const alCambiarVisibilidad = () => document.body.classList.toggle('ep-pausado', document.hidden);
+    document.addEventListener('visibilitychange', alCambiarVisibilidad);
+    return () => {
+      document.removeEventListener('visibilitychange', alCambiarVisibilidad);
+      document.body.classList.remove('ep-pausado');
+    };
+  }, []);
+
   return (
-    <>
-      <CinematicHero />
-      <Productos productos={individuales} estado={estado} />
-      <Combos combos={combos} estado={estado} />
-      <Beneficios />
-      <Historia />
-      <Opiniones />
-      <Preguntas />
-    </>
+    <MotionConfig reducedMotion="user">
+      <div className="ep-tienda">
+        <CinematicHero />
+        <Productos productos={individuales} estado={estado} />
+        <Picante productos={individuales} />
+        <Ingredientes />
+        <ConQueSeCome />
+        <Combos combos={combos} estado={estado} />
+        <Historia />
+        <Proceso />
+        <Negocios combos={combos} />
+        <Opiniones />
+        <Preguntas />
+        <Cierre />
+        <div className="ep-grano" aria-hidden="true" />
+      </div>
+    </MotionConfig>
   );
 }
