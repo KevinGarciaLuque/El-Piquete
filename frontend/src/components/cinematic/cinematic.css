@@ -26,6 +26,12 @@
   isolation: isolate;
 }
 
+/* Marco de la película: toda la pantalla en escritorio, un recuadro vertical en celular. */
+.cine-marco {
+  position: absolute;
+  inset: 0;
+}
+
 .cine-capa {
   position: absolute;
   inset: 0;
@@ -484,25 +490,27 @@
 }
 
 @media (orientation: portrait), (max-width: 720px) {
+  /* La foto empieza debajo del menú y conserva su proporción: el frasco se ve completo. */
   .cine-estatica {
     display: block;
     min-height: 0;
+    padding-top: var(--cine-header, 0px);
   }
 
   .cine-estatica__media {
     position: relative;
-    height: 64svh;
-    min-height: 360px;
+    aspect-ratio: 3 / 4;
+    max-width: calc(68svh * 0.85);
+    max-height: 68svh;
+    margin: 0 auto;
   }
 
   .cine-estatica__media img {
-    object-position: 50% 35%;
+    object-position: 50% 40%;
   }
 
   .cine-estatica__media::after {
-    background:
-      linear-gradient(to bottom, rgba(6, 10, 20, 0.5), rgba(6, 10, 20, 0) 18%),
-      linear-gradient(to top, var(--color-ep-night) 2%, rgba(14, 23, 38, 0) 34%);
+    background: linear-gradient(to top, var(--color-ep-night) 2%, rgba(14, 23, 38, 0) 30%);
   }
 
   .cine-estatica__texto {
@@ -607,4 +615,93 @@ html[data-hero-activo] .site-header__nav a:hover {
 
 html[data-hero-activo] .site-header__icono:hover {
   background: rgba(244, 237, 225, 0.1);
+}
+
+/* Película vertical en celular: el marco va debajo del menú y el texto debajo de la
+   película, así las letras nunca tapan el frasco. */
+.cine-hero--movil {
+  --marco-alto: min(56svh, calc(100svh - var(--cine-header, 64px) - 290px));
+}
+
+.cine-hero--movil .cine-escenario {
+  height: 100svh;
+}
+
+.cine-hero--movil .cine-marco {
+  top: var(--cine-header, 0px);
+  right: 0;
+  bottom: auto;
+  left: 0;
+  max-width: calc(var(--marco-alto) * 0.85);
+  height: var(--marco-alto);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.cine-hero--movil .cine-capa {
+  object-position: 50% 40%;
+}
+
+.cine-hero--movil .cine-velo {
+  background: linear-gradient(to top, var(--color-ep-night) 0%, rgba(14, 23, 38, 0) 24%);
+}
+
+.cine-hero--movil .cine-banda {
+  top: calc(var(--cine-header, 0px) + var(--marco-alto) + 16px);
+  right: 20px;
+  left: 20px;
+  width: auto;
+  transform: none;
+  text-shadow: none;
+}
+
+.cine-hero--movil .cine-banda::before {
+  display: none;
+}
+
+.cine-hero--movil .cine-etiqueta {
+  margin-bottom: 0.7rem;
+  font-size: 0.64rem;
+}
+
+.cine-hero--movil .cine-caption {
+  max-width: 16ch;
+  font-size: clamp(1.75rem, 7.6vw, 2.4rem);
+}
+
+.cine-hero--movil .cine-banda--cierre .cine-titular {
+  max-width: 16ch;
+  font-size: clamp(1.8rem, 7.8vw, 2.5rem);
+}
+
+.cine-hero--movil .cine-subtitulo {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.cine-hero--movil .cine-acciones {
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.cine-hero--movil .cine-btn {
+  min-height: 46px;
+  padding: 0 1.15em;
+  font-size: 0.9rem;
+}
+
+.cine-hero--movil .cine-recorrido {
+  display: none;
+}
+
+.cine-hero--movil .cine-indicador {
+  top: calc(var(--cine-header, 0px) + var(--marco-alto) - 84px);
+  bottom: auto;
+}
+
+/* En celular el cierre deja solo titular y botones: así los botones quedan por encima
+   del botón flotante de WhatsApp y del borde de la sección siguiente. */
+.cine-hero--movil .cine-banda--cierre .cine-subtitulo {
+  display: none;
 }

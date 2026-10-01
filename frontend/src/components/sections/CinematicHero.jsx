@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useModoHero from '../../hooks/useModoHero';
-import { cargarVideoHero, suscribirVideoHero } from '../../lib/videoHero';
+import { cargarVideoHero, FUENTES_HERO, suscribirVideoHero } from '../../lib/videoHero';
 import TextoDividido from '../cinematic/TextoDividido';
 import '../cinematic/cinematic.css';
 
@@ -20,7 +20,23 @@ const MICRO = 'Encurtidos artesanales · Tegucigalpa';
 const TITULAR = 'El sabor que transforma cada comida.';
 const SUBTITULO = 'Encurtidos artesanales preparados con ingredientes frescos y el nivel de picante perfecto.';
 
-const IMAGEN_FINAL = '/cinematic/hero-ending.webp';
+// Cada versión de la película: horizontal para escritorio y vertical (3:4) para celular.
+const RECURSOS = {
+  video: {
+    fuente: FUENTES_HERO.video,
+    poster: '/cinematic/hero-poster.webp',
+    posterAncho: 1728,
+    posterAlto: 972,
+    final: '/cinematic/hero-ending.webp',
+  },
+  movil: {
+    fuente: FUENTES_HERO.movil,
+    poster: '/cinematic/hero-poster-portrait.webp',
+    posterAncho: 540,
+    posterAlto: 720,
+    final: '/cinematic/hero-ending-portrait.webp',
+  },
+};
 
 // Tres cuadros de la película para la portada fija de teléfonos.
 const TIRA = [
@@ -85,7 +101,8 @@ function Acciones({ refAcciones, primero }) {
   );
 }
 
-function HeroConVideo() {
+function HeroConVideo({ variante }) {
+  const recursos = RECURSOS[variante];
   const seccionRef = useRef(null);
   const escenarioRef = useRef(null);
   const posterRef = useRef(null);
@@ -228,7 +245,7 @@ function HeroConVideo() {
       alternarClase('paso-inicio', p > 0.02);
 
       // Mientras el video no está disponible, la foto del frasco acompaña el cierre.
-      if (!videoListo && p > 0.6 && !imagenFinal.getAttribute('src')) imagenFinal.src = IMAGEN_FINAL;
+      if (!videoListo && p > 0.6 && !imagenFinal.getAttribute('src')) imagenFinal.src = recursos.final;
       alternarClase('muestra-final', !videoListo && p > 0.8);
     }
 
@@ -292,15 +309,25 @@ function HeroConVideo() {
 
     video.addEventListener('seeked', alTerminarSeek);
     video.addEventListener('error', alFallarVideo);
+    // Safari en iOS no pinta cuadros de un video que nunca se reprodujo: un play y pausa
+    // silenciosos al cargar lo habilitan para los saltos de tiempo.
+    function desbloquear() {
+      const intento = video.play();
+      if (intento) intento.then(() => video.pause()).catch(() => {});
+    }
+
     video.addEventListener('loadeddata', alPoderMostrar);
+    video.addEventListener('canplay', alPoderMostrar);
+    video.addEventListener('loadedmetadata', desbloquear);
     if (video.readyState >= 2 && video.currentSrc) alPoderMostrar();
 
-    const desuscribir = suscribirVideoHero((estadoVideo) => {
+    const desuscribir = suscribirVideoHero(recursos.fuente, (estadoVideo) => {
       anillo.style.setProperty('--ld', (126 * (1 - estadoVideo.progreso)).toFixed(1));
       if (estadoVideo.fase === faseVideo) return;
       faseVideo = estadoVideo.fase;
       alternarClase('cargando-video', faseVideo === 'cargando');
       if (faseVideo === 'listo' && video.src !== estadoVideo.url) {
+        video.preload = 'auto';
         video.src = estadoVideo.url;
         video.load();
       }
@@ -313,7 +340,7 @@ function HeroConVideo() {
     const iniciarVideo = () => {
       if (videoIniciado) return;
       videoIniciado = true;
-      cargarVideoHero();
+      cargarVideoHero(recursos.fuente);
     };
     if (poster.complete) iniciarVideo();
     poster.addEventListener('load', iniciarVideo);
@@ -330,37 +357,41 @@ function HeroConVideo() {
       video.removeEventListener('seeked', alTerminarSeek);
       video.removeEventListener('error', alFallarVideo);
       video.removeEventListener('loadeddata', alPoderMostrar);
+      video.removeEventListener('canplay', alPoderMostrar);
+      video.removeEventListener('loadedmetadata', desbloquear);
       poster.removeEventListener('load', iniciarVideo);
       poster.removeEventListener('error', iniciarVideo);
       desuscribir();
     };
-  }, []);
+  }, [recursos]);
 
   const marcas = [...BANDAS.map((banda) => banda.rango[0]), RANGO_CIERRE[0]];
 
   return (
-    <section id="inicio" ref={seccionRef} className="cine-hero" aria-label="De ingredientes frescos a un frasco de El Piquete">
+    <section id="inicio" ref={seccionRef} className={`cine-hero cine-hero--${variante}`} aria-label="De ingredientes frescos a un frasco de El Piquete">
       <div ref={escenarioRef} className="cine-escenario">
-        <img
-          ref={posterRef}
-          className="cine-capa cine-poster"
-          src="/cinematic/hero-poster.webp"
-          alt=""
-          width="1912"
-          height="1080"
-          fetchPriority="high"
-        />
-        <img ref={imagenFinalRef} className="cine-capa cine-imagen-final" alt="" width="1920" height="1086" decoding="async" />
-        <video
-          ref={videoRef}
-          className="cine-capa cine-video"
-          muted
-          playsInline
-          preload="none"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
-        <div className="cine-velo" aria-hidden="true" />
+        <div className="cine-marco">
+          <img
+            ref={posterRef}
+            className="cine-capa cine-poster"
+            src={recursos.poster}
+            alt=""
+            width={recursos.posterAncho}
+            height={recursos.posterAlto}
+            fetchPriority="high"
+          />
+          <img ref={imagenFinalRef} className="cine-capa cine-imagen-final" alt="" decoding="async" />
+          <video
+            ref={videoRef}
+            className="cine-capa cine-video"
+            muted
+            playsInline
+            preload="none"
+            aria-hidden="true"
+            tabIndex={-1}
+          />
+          <div className="cine-velo" aria-hidden="true" />
+        </div>
 
         {BANDAS.map((banda, indice) => (
           <div
@@ -460,5 +491,7 @@ function HeroEstatico() {
 
 export default function CinematicHero() {
   const modo = useModoHero();
-  return modo === 'video' ? <HeroConVideo /> : <HeroEstatico />;
+  if (modo === 'estatico') return <HeroEstatico />;
+  // La clave fuerza un montaje nuevo al cambiar de versión (por ejemplo al rotar una tableta).
+  return <HeroConVideo key={modo} variante={modo} />;
 }
