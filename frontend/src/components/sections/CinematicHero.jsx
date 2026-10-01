@@ -20,7 +20,7 @@ const MICRO = 'Encurtidos artesanales · Tegucigalpa';
 const TITULAR = 'El sabor que transforma cada comida.';
 const SUBTITULO = 'Encurtidos artesanales preparados con ingredientes frescos y el nivel de picante perfecto.';
 
-// Cada versión de la película: horizontal para escritorio y vertical (3:4) para celular.
+// Cada versión de la película: horizontal para escritorio y vertical (9:16) para celular.
 const RECURSOS = {
   video: {
     fuente: FUENTES_HERO.video,
@@ -31,10 +31,10 @@ const RECURSOS = {
   },
   movil: {
     fuente: FUENTES_HERO.movil,
-    poster: '/cinematic/hero-poster-portrait.webp',
+    poster: '/cinematic/hero-poster-movil.webp',
     posterAncho: 540,
-    posterAlto: 720,
-    final: '/cinematic/hero-ending-portrait.webp',
+    posterAlto: 960,
+    final: '/cinematic/hero-ending-movil.webp',
   },
 };
 

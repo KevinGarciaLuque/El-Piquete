@@ -617,42 +617,40 @@ html[data-hero-activo] .site-header__icono:hover {
   background: rgba(244, 237, 225, 0.1);
 }
 
-/* Película vertical en celular: el marco va debajo del menú y el texto debajo de la
-   película, así las letras nunca tapan el frasco. */
+/* Película vertical en celular: ocupa toda la pantalla (9:16). Los textos van abajo,
+   sobre un degradado, dejando libre la etiqueta del frasco y el botón de WhatsApp.
+   100lvh llena la pantalla aunque el navegador oculte sus barras; la diferencia con
+   100svh mantiene los textos por encima de esas barras cuando están visibles. */
 .cine-hero--movil {
-  --marco-alto: min(56svh, calc(100svh - var(--cine-header, 64px) - 290px));
+  --barras: calc(100lvh - 100svh);
 }
 
 .cine-hero--movil .cine-escenario {
-  height: 100svh;
-}
-
-.cine-hero--movil .cine-marco {
-  top: var(--cine-header, 0px);
-  right: 0;
-  bottom: auto;
-  left: 0;
-  max-width: calc(var(--marco-alto) * 0.85);
-  height: var(--marco-alto);
-  margin: 0 auto;
-  overflow: hidden;
+  height: 100lvh;
 }
 
 .cine-hero--movil .cine-capa {
-  object-position: 50% 40%;
+  object-position: 50% 45%;
 }
 
 .cine-hero--movil .cine-velo {
-  background: linear-gradient(to top, var(--color-ep-night) 0%, rgba(14, 23, 38, 0) 24%);
+  background:
+    linear-gradient(to bottom, rgba(6, 10, 20, 0.5), rgba(6, 10, 20, 0) 16%),
+    linear-gradient(
+      to top,
+      rgba(8, 13, 24, 0.92) var(--barras),
+      rgba(8, 13, 24, 0.66) calc(var(--barras) + 24%),
+      rgba(8, 13, 24, 0) calc(var(--barras) + 48%)
+    );
 }
 
 .cine-hero--movil .cine-banda {
-  top: calc(var(--cine-header, 0px) + var(--marco-alto) + 16px);
+  top: auto;
   right: 20px;
+  bottom: calc(var(--barras) + 96px);
   left: 20px;
   width: auto;
   transform: none;
-  text-shadow: none;
 }
 
 .cine-hero--movil .cine-banda::before {
@@ -669,15 +667,17 @@ html[data-hero-activo] .site-header__icono:hover {
   font-size: clamp(1.75rem, 7.6vw, 2.4rem);
 }
 
+/* El cierre en celular queda compacto (titular en dos líneas y botones) para que la
+   etiqueta del frasco se vea completa sobre el texto. */
 .cine-hero--movil .cine-banda--cierre .cine-titular {
-  max-width: 16ch;
-  font-size: clamp(1.8rem, 7.8vw, 2.5rem);
+  max-width: none;
+  font-size: clamp(1.45rem, 6.6vw, 2.2rem);
+  line-height: 1.08;
 }
 
-.cine-hero--movil .cine-subtitulo {
-  margin-top: 0.6rem;
-  font-size: 0.95rem;
-  line-height: 1.45;
+.cine-hero--movil .cine-banda--cierre .cine-etiqueta,
+.cine-hero--movil .cine-banda--cierre .cine-subtitulo {
+  display: none;
 }
 
 .cine-hero--movil .cine-acciones {
@@ -696,12 +696,9 @@ html[data-hero-activo] .site-header__icono:hover {
 }
 
 .cine-hero--movil .cine-indicador {
-  top: calc(var(--cine-header, 0px) + var(--marco-alto) - 84px);
+  top: calc(var(--cine-header, 0px) + 16px);
+  right: 16px;
   bottom: auto;
-}
-
-/* En celular el cierre deja solo titular y botones: así los botones quedan por encima
-   del botón flotante de WhatsApp y del borde de la sección siguiente. */
-.cine-hero--movil .cine-banda--cierre .cine-subtitulo {
-  display: none;
+  left: auto;
+  transform: none;
 }

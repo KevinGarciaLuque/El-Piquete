@@ -1,7 +1,7 @@
 // Tamaños reales de cada archivo: respaldo para el anillo de carga si falta Content-Length.
 export const FUENTES_HERO = {
   video: { url: '/cinematic/hero-scrub.mp4', bytes: 8011272 },
-  movil: { url: '/cinematic/hero-scrub-portrait.mp4', bytes: 2781164 },
+  movil: { url: '/cinematic/hero-scrub-movil.mp4', bytes: 3480835 },
 };
 // Sin recibir datos durante este tiempo, la descarga se cancela y la portada queda con imágenes fijas.
 const LIMITE_SIN_PROGRESO_MS = 20000;
